@@ -5,6 +5,8 @@
 let containerCharacters,
 	cardsTotalMistery = 0;
 
+const PATH_IMGS = "./assets/imgs/";
+
 class arraysGames {
 	constructor(id, name, name_image) {
 		this.id = id;
@@ -252,7 +254,7 @@ let showLoseWeapon = (idWeapon) => {
 	// console.log("id_weapon_mistery en showlose ", id_weapon_mistery);
 
 	Swal.fire({
-		imageUrl: `./weapons/${weaponsArray[idWeapon].name_image}.png`,
+		imageUrl: `${PATH_IMGS}weapons/${weaponsArray[idWeapon].name_image}.png`,
 		html: `<p class="swa-text"> Perdiste el arma era la <span> ${weaponsArray[idWeapon].name} </span> <br> tu puntajes es de <span>  ${score} </span>  </p>`,
 		position: "center",
 		showCancelButton: true,
@@ -273,7 +275,7 @@ let showLoseRoom = (idRoom) => {
 	// console.log("id_weapon_mistery en showlose ", id_room_mistery);
 
 	Swal.fire({
-		imageUrl: `./weapons/${roomsArray[idRoom].name_image}.png`,
+		imageUrl: `${PATH_IMGS}weapons/${roomsArray[idRoom].name_image}.png`,
 		html: `<p class="swa-text">  Perdiste el lugar era la <span>  ${roomsArray[idRoom].name} </span> <br> tu puntajes es de  <span>  ${score}  </span>  </p>`,
 		position: "center",
 		showCancelButton: true,
@@ -411,7 +413,7 @@ let showAssasin = (real_assasin, suspectsArray) => {
 					</div>
   		</div>
 		</div>
-		`
+		`;
 
 		containerCharacters.append(column);
 		containerListSuspects.innerHTML = "";
@@ -439,7 +441,7 @@ let showWeapon = () => {
 		<div class="card text-bg-dark mb-3" style="max-width: 640px;">
   		<div class="row g-0">
 				<div class="col-md-4">
-					<img src="./weapons/${weaponsArray[id_weapon].name_image}.png" id="imgId-${weaponsArray[id_weapon].id}" class="card-img-top " alt="...">
+					<img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png" id="imgId-${weaponsArray[id_weapon].id}" class="card-img-top " alt="...">
 				</div>
 				<div class="col-md-8">
 					<div class="card-body">
@@ -448,7 +450,7 @@ let showWeapon = () => {
 					</div>
   		</div>
 		</div>
-		`
+		`;
 
 		containerWeapons.append(column);
 		containerListWeapons.innerHTML = "";
@@ -477,7 +479,7 @@ let showRooms = () => {
 		<div class="card text-bg-dark mb-3" style="max-width: 640px;">
   		<div class="row g-0">
 				<div class="col-md-4">
-					<img src="./rooms/${roomsArray[id_room].name_image}.png" id="imgId-${roomsArray[id_room].id}" class="card-img-top " alt="...">
+					<img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png" id="imgId-${roomsArray[id_room].id}" class="card-img-top " alt="...">
 	 			</div>
 				<div class="col-md-8">
 					<div class="card-body">
@@ -538,7 +540,7 @@ let paintingWeapons = (arrWeapons) => {
  
 		<a href="#" id="btn-possWeapon-${weapon.id}"  >
 			<div class="cardz-weapons"  >
-				<img src="./weapons/${weapon.name_image}.png" id="imgId-${weapon.id}" class="rounded"  style="width:100%" >
+				<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgId-${weapon.id}" class="rounded"  style="width:100%" >
 				<div class="container">
 					<p class="cardz-title">${weapon.name}</p>
 				</div>
@@ -566,7 +568,7 @@ let paintingRooms = (arrRooms) => {
 		 
 		<a href="#" id="btn-poss-rooms-${rooms.id}"  >
 			<div class="cardz-rooms"  >
-				<img src="./rooms/${rooms.name_image}.png" id="imgId-${rooms.id}" class="rounded"  style="width:100%" >
+				<img src="${PATH_IMGS}rooms/${rooms.name_image}.png" id="imgId-${rooms.id}" class="rounded"  style="width:100%" >
 				<div class="container">
 					<p class="cardz-title">${rooms.name}</p>
 				</div>
@@ -663,7 +665,7 @@ let swatWeaponsFail = (weaponsArray) => {
 
 	Swal.fire({
 		toast: true,
-		imageUrl: `./weapons/${name_image}_cross.png`,
+		imageUrl: `${PATH_IMGS}weapons/${name_image}_cross.png`,
 		imageWidth: 300,
 		width: 300,
 		imageHeight: 300,
@@ -688,7 +690,7 @@ let swatRoomFail = (roomsArray) => {
 
 	Swal.fire({
 		toast: true,
-		imageUrl: `./rooms/${name_image}_cross.png`,
+		imageUrl: `${PATH_IMGS}rooms/${name_image}_cross.png`,
 		width: 300,
 		imageHeight: 300,
 		background: "#323643",
