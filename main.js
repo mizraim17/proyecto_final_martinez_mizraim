@@ -59,9 +59,6 @@ let genereAssesinMurder = (suspectsArray) => {
 		suspectsArray[numDiedPerson].id,
 	];
 
-	// console.log("arrayAssesinDied[0]", arrayAssesinDied[0]);
-	// console.log("arrayAssesinDied[1]", arrayAssesinDied[1]);
-
 	return arrayAssesinDied;
 };
 
