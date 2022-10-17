@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;900&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul {
+	padding-left: 0;
+}
+
+a:link,
+a:visited,
+a:active {
+	text-decoration: none;
+	color: white;
+}
+
+// variables
+
+$gray: #393e46;
+$gray-1: #3c3c3c;
+$gray-2: #606470;
+$green: #4aa96c;
+$rose: #f27c7c;
+$rose-2: #f56d8f;
+$blue: #6bacbf;
+
+body {
+	background: $gray-1;
+}
+
+.blur-image {
+	filter: blur(11px);
+}
+
+.colum-list-suspects {
+	background-color: $gray-2;
+	padding: 2%;
+}
+
+.base-list {
+	color: white;
+	font-weight: 500;
+	font-style: italic;
+}
+
+.list-weapons,
+.list-suspects,
+.list-rooms {
+	@extend .base-list;
+}
+
+.margin-5 {
+	margin-top: 2%;
+}
+
+.tit-list-suspects,
+.tit-list-weapons,
+.tit-list-rooms {
+	padding-top: 8%;
+	color: $green;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.tit-points,
+.tit-weapon {
+	color: $rose;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+#name_suspect,
+#name_weapon,
+#name_rooms {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.name_correct {
+	color: #faffa8;
+	padding: 2%;
+	background-color: rgba(240, 240, 240, 0.1);
+
+	span {
+		font-style: italic;
+	}
+}
+
+.name_incorrect {
+	color: $rose-2;
+	padding: 2%;
+
+	span {
+		font-style: italic;
+	}
+}
+
+#person_murder {
+	text-shadow: 1px 1px 2px black;
+	color: $blue;
+	font-size: 24px;
+	font-weight: bold;
+
+	span {
+		color: $rose;
+	}
+}
+
+.cardz {
+	border-radius: 15px;
+
+	background: #f27c7c;
+	// box-shadow: 2px 2px 6px #ce6969, -2px -2px 6px #ff8f8f;
+	transition: 0.3s;
+	width: 80%;
+	height: 244px;
+	width: 139px;
+}
+
+.cardz-weapons {
+	@extend .cardz;
+	background-color: $blue;
+}
+
+.cardz-rooms {
+	@extend .cardz;
+	background-color: $green;
+}
+
+.cardz-title {
+	font-weight: bold;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+}
+
+.cardz:hover {
+	box-shadow: 0 10px 16px 0 rgba(255, 255, 255, 0.85);
+}
+
+.cardz-text {
+	@extend .txt-fail;
+	color: $green  !important;
+
+	span {
+		color: white;
+	}
+}
+
+.container {
+	padding: 2px 16px;
+}
+
+.tit-all-characters {
+	color: $rose;
+	text-align: center;
+	font-weight: 900;
+	font-size: 42px;
+}
+
+.tit-all-weapons {
+	padding-top: 3%;
+	@extend .tit-all-characters;
+	color: $blue;
+}
+
+.tit-all-rooms {
+	@extend .tit-all-characters;
+	color: $green;
+}
+
+.cross-text {
+	text-decoration: line-through;
+}
+
+.fa-solid {
+	color: $rose-2  !important;
+	padding-right: 4px;
+}
+
+#container-score {
+	@extend .tit-points;
+	color: yellow;
+}
+
+.swa-text {
+	font-size: 22px;
+	font-weight: normal;
+	color: #f56d8f;
+
+	span {
+		color: gold;
+		font-size: 24px;
+		font-style: italic;
+		font-weight: bold;
+	}
+
+	span:nth-child(1) {
+		color: tomato;
+	}
+}
+
+.txt-fail {
+	font-size: 22px;
+	font-weight: normal;
+	color: #f56d8f;
+
+	span {
+		font-weight: 24px;
+		color: tomato;
+		font-weight: bold;
+
+		:nth-child(2) {
+			color: gold;
+		}
+	}
+}
+
+.txt-winner {
+	@extend .txt-fail;
+	color: $green;
+
+	span {
+		color: $rose-2;
+
+		:nth-child(2) {
+			color: $rose-2;
+		}
+	}
+}
+
+img.swal2-image {
+	margin: 0;
+}
+
+div.swal2-popup.swal2-toast {
+	padding: 0;
+}
+
+.img-character {
+	position: absolute;
+	top: 50%;
+	z-index: 1000;
+	width: 100%;
+	height: 220px;
+}
+
+.img-cross {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 150px;
+}
+
+.loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: $gray;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+	transition: 1s all;
+	opacity: 0;
+}
+
+.loading .show {
+	opacity: 1;
+}
+
+.loading .spin {
+	border: 3px solid hsla(185, 100%, 62%, 0.2);
+	border-top-color: #3cefff;
+	border-radius: 50%;
+	width: 3em;
+	height: 3em;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}

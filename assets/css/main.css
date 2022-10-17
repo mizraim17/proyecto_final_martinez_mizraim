@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+ul {
+  padding-left: 0; }
+
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: white; }
+
+body {
+  background: #3c3c3c; }
+
+.blur-image {
+  filter: blur(11px); }
+
+.colum-list-suspects {
+  background-color: #606470;
+  padding: 2%; }
+
+.base-list, .list-weapons,
+.list-suspects,
+.list-rooms {
+  color: white;
+  font-weight: 500;
+  font-style: italic; }
+
+.margin-5 {
+  margin-top: 2%; }
+
+.tit-list-suspects,
+.tit-list-weapons,
+.tit-list-rooms {
+  padding-top: 8%;
+  color: #4aa96c;
+  font-size: 20px;
+  font-weight: bold; }
+
+.tit-points, #container-score,
+.tit-weapon {
+  color: #f27c7c;
+  font-size: 22px;
+  font-weight: bold; }
+
+#name_suspect,
+#name_weapon,
+#name_rooms {
+  font-size: 18px;
+  font-weight: 500; }
+
+.name_correct {
+  color: #faffa8;
+  padding: 2%;
+  background-color: rgba(240, 240, 240, 0.1); }
+  .name_correct span {
+    font-style: italic; }
+
+.name_incorrect {
+  color: #f56d8f;
+  padding: 2%; }
+  .name_incorrect span {
+    font-style: italic; }
+
+#person_murder {
+  text-shadow: 1px 1px 2px black;
+  color: #6bacbf;
+  font-size: 24px;
+  font-weight: bold; }
+  #person_murder span {
+    color: #f27c7c; }
+
+.cardz, .cardz-weapons, .cardz-rooms {
+  border-radius: 15px;
+  background: #f27c7c;
+  transition: 0.3s;
+  width: 80%;
+  height: 244px;
+  width: 139px; }
+
+.cardz-weapons {
+  background-color: #6bacbf; }
+
+.cardz-rooms {
+  background-color: #4aa96c; }
+
+.cardz-title {
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  text-align: center; }
+
+.cardz:hover, .cardz-weapons:hover, .cardz-rooms:hover {
+  box-shadow: 0 10px 16px 0 rgba(255, 255, 255, 0.85); }
+
+.cardz-text {
+  color: #8de0a6 !important; }
+  .cardz-text span {
+    color: white; }
+
+.container {
+  padding: 2px 16px; }
+
+.tit-all-characters, .tit-all-weapons, .tit-all-rooms {
+  color: #f27c7c;
+  text-align: center;
+  font-weight: 900;
+  font-size: 42px; }
+
+.tit-all-weapons {
+  padding-top: 3%;
+  color: #6bacbf; }
+
+.tit-all-rooms {
+  color: #4aa96c; }
+
+.cross-text {
+  text-decoration: line-through; }
+
+.fa-solid {
+  color: #f56d8f !important;
+  padding-right: 4px; }
+
+#container-score {
+  color: yellow; }
+
+.swa-text {
+  font-size: 22px;
+  font-weight: normal;
+  color: #f56d8f; }
+  .swa-text span {
+    color: gold;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: bold; }
+  .swa-text span:nth-child(1) {
+    color: tomato; }
+
+.txt-fail, .cardz-text, .txt-winner {
+  font-size: 22px;
+  font-weight: normal;
+  color: #f56d8f; }
+  .txt-fail span, .cardz-text span, .txt-winner span {
+    font-weight: 24px;
+    color: tomato;
+    font-weight: bold; }
+    .txt-fail span :nth-child(2), .cardz-text span :nth-child(2), .txt-winner span :nth-child(2) {
+      color: gold; }
+
+.txt-winner {
+  color: #4aa96c; }
+  .txt-winner span {
+    color: #f56d8f; }
+    .txt-winner span :nth-child(2) {
+      color: #f56d8f; }
+
+img.swal2-image {
+  margin: 0; }
+
+div.swal2-popup.swal2-toast {
+  padding: 0; }
+
+.img-character {
+  position: absolute;
+  top: 50%;
+  z-index: 1000;
+  width: 100%;
+  height: 220px; }
+
+.img-cross {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px; }
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #393e46;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: 1s all;
+  opacity: 0; }
+
+.loading .show {
+  opacity: 1; }
+
+.loading .spin {
+  border: 3px solid rgba(61, 239, 255, 0.2);
+  border-top-color: #3cefff;
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  animation: spin 1s linear infinite; }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg); } }
