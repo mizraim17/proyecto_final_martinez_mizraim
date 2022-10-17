@@ -1,12 +1,13 @@
 ///Game of clue version The office and Rick and morty
 
-//Variables of games
+//Global Variables of games
 
 let containerCharacters,
 	cardsTotalMistery = 0;
 
 const PATH_IMGS = "./assets/imgs/";
 
+//declarate constructor for rooms and weapons
 class arraysGames {
 	constructor(id, name, name_image) {
 		this.id = id;
@@ -14,6 +15,8 @@ class arraysGames {
 		this.name_image = name_image;
 	}
 }
+
+// create objects rooms
 
 const roomsArray = [
 	new arraysGames(0, "Recepción", "recepcion"),
