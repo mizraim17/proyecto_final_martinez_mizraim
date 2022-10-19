@@ -62,8 +62,6 @@ let genereAssesinMurder = (suspectsArray) => {
 	return arrayAssesinDied;
 };
 
-let oportunities = [false, false, false];
-
 //generate numer randoms
 let getNumberRandom = (num) => Math.round(Math.random() * num);
 
@@ -72,7 +70,7 @@ let getNumberRandom = (num) => Math.round(Math.random() * num);
 let getArrayCharacters = () => {
 	let arrCharacter = getNumberRandom(826);
 
-	for (let i = 0; i < 10; i++) {
+	for (let i = 0; i < 6; i++) {
 		arrCharacter = arrCharacter + "," + getNumberRandom(826);
 	}
 

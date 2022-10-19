@@ -98,7 +98,7 @@ body {
   box-shadow: 0 10px 16px 0 rgba(255, 255, 255, 0.85); }
 
 .cardz-text {
-  color: #8de0a6 !important; }
+  color: #4aa96c !important; }
   .cardz-text span {
     color: white; }
 
@@ -184,25 +184,27 @@ div.swal2-popup.swal2-toast {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #393e46;
+  background-color: rgba(32, 24, 24, 0.745);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
   transition: 1s all;
-  opacity: 0; }
+  opacity: 1; }
 
 .loading .show {
   opacity: 1; }
 
 .loading .spin {
-  border: 3px solid rgba(61, 239, 255, 0.2);
-  border-top-color: #3cefff;
+  border: 23px solid rgba(251, 250, 249, 0.678);
+  border-top-color: #560a6f;
   border-radius: 50%;
-  width: 3em;
-  height: 3em;
+  width: 23em;
+  height: 23em;
   animation: spin 1s linear infinite; }
 
 @keyframes spin {
-  to {
+  0% {
+    transform: rotate(0deg); }
+  100% {
     transform: rotate(360deg); } }
