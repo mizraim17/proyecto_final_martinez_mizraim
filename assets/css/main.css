@@ -53,6 +53,12 @@ body {
   font-size: 18px;
   font-weight: 500; }
 
+.selected-card {
+  opacity: 0.5;
+  border: 3px solid green;
+  box-shadow: 0 10px 16px 0 rgba(6, 121, 2, 0.974);
+  background-color: rgba(240, 240, 240, 0.1); }
+
 .name_correct {
   color: #faffa8;
   padding: 2%;
@@ -74,7 +80,7 @@ body {
   #person_murder span {
     color: #f27c7c; }
 
-.cardz, .cardz-weapons, .cardz-rooms {
+.cardz-asssin, .cardz-weapons, .cardz-rooms {
   border-radius: 15px;
   background: #f27c7c;
   transition: 0.3s;
@@ -94,7 +100,7 @@ body {
   color: white;
   text-align: center; }
 
-.cardz:hover, .cardz-weapons:hover, .cardz-rooms:hover {
+.cardz-asssin:hover, .cardz-weapons:hover, .cardz-rooms:hover {
   box-shadow: 0 10px 16px 0 rgba(255, 255, 255, 0.85); }
 
 .cardz-text {

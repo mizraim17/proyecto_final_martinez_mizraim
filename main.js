@@ -95,6 +95,8 @@ let getCharacters = (arrayCharacters) => {
 //initialize all variables
 
 let initElements = () => {
+	ternary = { assasin: false, weapon: false, room: false };
+
 	container_loader = document.getElementById("container-loader");
 
 	containerCharacters = document.getElementById("containerCharacters");
@@ -285,6 +287,18 @@ let showLoseRoom = (idRoom) => {
 			Swal.fire("Adios", "", "error");
 		}
 	});
+};
+
+//Tick card of assasin
+let tickCardAssasin = (arrSuspects, id_suspect) => {
+	if (ternary.assasin != true) {
+		cardAssasin = document.getElementById(`cardId-${id_suspect}`);
+		console.log("cardAssasin", cardAssasin);
+		cardAssasin.classList = "selected-card";
+		ternary.assasin = true;
+	} else {
+		swatAssasinChosen();
+	}
 };
 
 //Verify who is the killer
@@ -510,8 +524,8 @@ let paintingCharacters = (arrSuspects) => {
 		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3 ";
 		column.id = `character-${character.id}`;
 		column.innerHTML = `
-			<a href="#" id="btn-possAssesin-${character.id}" " > 
-				<div class="cardz">		
+			<a href="#" id="btn-possAssesin-${character.id}"  > 
+				<div class="cardz-asssin" id="cardId-${character.id}">		
 					<img src=" ${character.image}" id="imgId-${character.id}" class="rounded  "  style="width:100%" >
 					<div class="container">			
 						<p class="cardz-title ">${character.name}</p>
@@ -522,7 +536,7 @@ let paintingCharacters = (arrSuspects) => {
 
 		containerCharacters.append(column);
 		let btnAccuse = document.getElementById(`btn-possAssesin-${character.id}`);
-		btnAccuse.onclick = () => checkAssasin(arrSuspects, character.id);
+		btnAccuse.onclick = () => tickCardAssasin(arrSuspects, character.id);
 	});
 };
 
@@ -633,6 +647,22 @@ let playSound = (win_lose) => {
 		: (sound.src = "./sounds/aplauso.mp3");
 
 	sound.play();
+};
+
+let swatAssasinChosen = () => {
+	Swal.fire({
+		toast: true,
+		imageUrl: ` ${posible_assasin.image}`,
+		imageWidth: 300,
+		width: 300,
+		imageHeight: 300,
+		background: "#323643",
+		html: `<p class="txt-fail"> Ya elegiste posible asesino <span> ${posible_assasin.name} </span> </p>`,
+		position: "center",
+		showConfirmButton: false,
+		timerProgressBar: true,
+		timer: 1500,
+	});
 };
 
 let swatSuspectFail = (posible_assasin, real_assasin) => {

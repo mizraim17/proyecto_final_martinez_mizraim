@@ -79,6 +79,13 @@ body {
 	font-weight: 500;
 }
 
+.selected-card {
+	opacity: 0.5;
+	border: 3px solid green;
+	box-shadow: 0 10px 16px 0 rgba(6, 121, 2, 0.974);
+	background-color: rgba(240, 240, 240, 0.1);
+}
+
 .name_correct {
 	color: #faffa8;
 	padding: 2%;
@@ -109,7 +116,7 @@ body {
 	}
 }
 
-.cardz {
+.cardz-asssin {
 	border-radius: 15px;
 
 	background: #f27c7c;
@@ -121,12 +128,12 @@ body {
 }
 
 .cardz-weapons {
-	@extend .cardz;
+	@extend .cardz-asssin;
 	background-color: $blue;
 }
 
 .cardz-rooms {
-	@extend .cardz;
+	@extend .cardz-asssin;
 	background-color: $green;
 }
 
@@ -137,7 +144,7 @@ body {
 	text-align: center;
 }
 
-.cardz:hover {
+.cardz-asssin:hover {
 	box-shadow: 0 10px 16px 0 rgba(255, 255, 255, 0.85);
 }
 
