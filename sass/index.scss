@@ -80,10 +80,12 @@ body {
 }
 
 .selected-card {
-	opacity: 0.5;
-	border: 3px solid green;
-	box-shadow: 0 10px 16px 0 rgba(6, 121, 2, 0.974);
-	background-color: rgba(240, 240, 240, 0.1);
+	border: 11px solid green;
+	.cardz-asssin {
+		opacity: 0.5;
+		box-shadow: 0 10px 16px 0 rgba(6, 121, 2, 0.974);
+		background-color: rgba(240, 240, 240, 0.1);
+	}
 }
 
 .name_correct {
@@ -118,12 +120,11 @@ body {
 
 .cardz-asssin {
 	border-radius: 15px;
-
+	margin: 0 !important;
 	background: #f27c7c;
-	// box-shadow: 2px 2px 6px #ce6969, -2px -2px 6px #ff8f8f;
 	transition: 0.3s;
 	width: 80%;
-	height: 244px;
+	height: 264px;
 	width: 139px;
 }
 
@@ -224,6 +225,12 @@ body {
 			color: gold;
 		}
 	}
+}
+
+.txt-na-na {
+	color: #f56d8f;
+	font-weight: bold;
+	font-weight: 26px;
 }
 
 .txt-winner {

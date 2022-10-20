@@ -290,14 +290,38 @@ let showLoseRoom = (idRoom) => {
 };
 
 //Tick card of assasin
-let tickCardAssasin = (arrSuspects, id_suspect) => {
-	if (ternary.assasin != true) {
-		cardAssasin = document.getElementById(`cardId-${id_suspect}`);
+let tickCardAssasin = (id_suspect) => {
+	if (ternary.assasin == false) {
+		cardAssasin = document.getElementById(`cardId-assasin-${id_suspect}`);
 		console.log("cardAssasin", cardAssasin);
 		cardAssasin.classList = "selected-card";
-		ternary.assasin = true;
+		ternary.assasin = id_suspect;
 	} else {
 		swatAssasinChosen();
+	}
+};
+
+//Tick card of weapon
+let tickCardWeapon = (id_weapon) => {
+	if (ternary.weapon == false) {
+		cardWeapon = document.getElementById(`cardId-weapon-${id_weapon}`);
+		console.log("cardweapon", cardWeapon);
+		cardWeapon.classList = "selected-card";
+		ternary.weapon = id_weapon;
+	} else {
+		swatWeaponChosen();
+	}
+};
+
+//Tick card of weapon
+let tickCardRoom = (id_room) => {
+	if (ternary.room == false) {
+		cardRoom = document.getElementById(`cardId-room-${id_room}`);
+		console.log("cardRoom", cardRoom);
+		cardRoom.classList = "selected-card";
+		ternary.room = id_room;
+	} else {
+		swatRoomChosen();
 	}
 };
 
@@ -524,19 +548,21 @@ let paintingCharacters = (arrSuspects) => {
 		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3 ";
 		column.id = `character-${character.id}`;
 		column.innerHTML = `
+		<div id="cardId-assasin-${character.id}"> 
 			<a href="#" id="btn-possAssesin-${character.id}"  > 
-				<div class="cardz-asssin" id="cardId-${character.id}">		
+				<div class="cardz-asssin" >		
 					<img src=" ${character.image}" id="imgId-${character.id}" class="rounded  "  style="width:100%" >
 					<div class="container">			
 						<p class="cardz-title ">${character.name}</p>
 					</div>
 				</div>		
 			</a>
+		</div>		
 		`;
 
 		containerCharacters.append(column);
 		let btnAccuse = document.getElementById(`btn-possAssesin-${character.id}`);
-		btnAccuse.onclick = () => tickCardAssasin(arrSuspects, character.id);
+		btnAccuse.onclick = () => tickCardAssasin(character.id);
 	});
 };
 
@@ -549,20 +575,21 @@ let paintingWeapons = (arrWeapons) => {
 		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3";
 		column.id = `weapon-${weapon.id}`;
 		column.innerHTML = `
- 
-		<a href="#" id="btn-possWeapon-${weapon.id}"  >
-			<div class="cardz-weapons"  >
-				<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgId-${weapon.id}" class="rounded"  style="width:100%" >
-				<div class="container">
-					<p class="cardz-title">${weapon.name}</p>
+ 		<div id="cardId-weapon-${weapon.id}"> 
+			<a href="#" id="btn-possWeapon-${weapon.id}"  >
+				<div class="cardz-weapons"  >
+					<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgId-${weapon.id}" class="rounded"  style="width:100%" >
+					<div class="container">
+						<p class="cardz-title">${weapon.name}</p>
+					</div>
 				</div>
-			</div>
-		</a> 
+			</a> 
+		</div>
 		`;
 
 		containerWeapons.append(column);
 		let btnWeapons = document.getElementById(`btn-possWeapon-${weapon.id}`);
-		btnWeapons.onclick = () => checkWeapons(arrWeapons, weapon.id);
+		btnWeapons.onclick = () => tickCardWeapon(weapon.id);
 	});
 };
 
@@ -577,20 +604,22 @@ let paintingRooms = (arrRooms) => {
 		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3";
 		column.id = `rooms-${rooms.id}`;
 		column.innerHTML = `
-		 
-		<a href="#" id="btn-poss-rooms-${rooms.id}"  >
-			<div class="cardz-rooms"  >
-				<img src="${PATH_IMGS}rooms/${rooms.name_image}.png" id="imgId-${rooms.id}" class="rounded"  style="width:100%" >
-				<div class="container">
-					<p class="cardz-title">${rooms.name}</p>
-				</div>
+		 	<div id="cardId-room-${rooms.id}"> 
+				<a href="#" id="btn-poss-rooms-${rooms.id}"  >
+					<div class="cardz-rooms"  >
+						<img src="${PATH_IMGS}rooms/${rooms.name_image}.png" id="imgId-${rooms.id}" class="rounded"  style="width:100%" >
+						<div class="container">
+							<p class="cardz-title">${rooms.name}</p>
+						</div>
+					</div>
+				</a>
 			</div>
-		</a> `;
+		`;
 
 		containerRooms.append(column);
 		let btnRooms = document.getElementById(`btn-poss-rooms-${rooms.id}`);
 
-		btnRooms.onclick = () => checkRooms(arrRooms, rooms.id);
+		btnRooms.onclick = () => tickCardRoom(rooms.id);
 	});
 };
 
@@ -652,16 +681,48 @@ let playSound = (win_lose) => {
 let swatAssasinChosen = () => {
 	Swal.fire({
 		toast: true,
-		imageUrl: ` ${posible_assasin.image}`,
+		imageUrl: `./assets/imgs/errors/ah_ah.gif`,
 		imageWidth: 300,
 		width: 300,
 		imageHeight: 300,
 		background: "#323643",
-		html: `<p class="txt-fail"> Ya elegiste posible asesino <span> ${posible_assasin.name} </span> </p>`,
+		html: `<p class="txt-na-na"> Ya elegiste posible asesino   </p>`,
 		position: "center",
 		showConfirmButton: false,
 		timerProgressBar: true,
-		timer: 1500,
+		timer: 2000,
+	});
+};
+
+let swatWeaponChosen = () => {
+	Swal.fire({
+		toast: true,
+		imageUrl: `./assets/imgs/errors/ah_ah.gif`,
+		imageWidth: 300,
+		width: 300,
+		imageHeight: 300,
+		background: "#323643",
+		html: `<p class="txt-na-na"> Ya elegiste posible arma  </p>`,
+		position: "center",
+		showConfirmButton: false,
+		timerProgressBar: true,
+		timer: 2000,
+	});
+};
+
+let swatRoomChosen = () => {
+	Swal.fire({
+		toast: true,
+		imageUrl: `./assets/imgs/errors/ah_ah.gif`,
+		imageWidth: 300,
+		width: 300,
+		imageHeight: 300,
+		background: "#323643",
+		html: `<p class="txt-na-na"> Ya elegiste posible lugar  </p>`,
+		position: "center",
+		showConfirmButton: false,
+		timerProgressBar: true,
+		timer: 2000,
 	});
 };
 
