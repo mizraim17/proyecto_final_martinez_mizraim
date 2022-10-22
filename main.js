@@ -80,7 +80,7 @@ let getArrayCharacters = () => {
 //get characters api of rick and morthy
 
 let getCharacters = (arrayCharacters) => {
-	console.log("entra y el arrayCharacters es", arrayCharacters);
+	// console.log("entra y el arrayCharacters es", arrayCharacters);
 
 	fetch(`https://rickandmortyapi.com/api/character/${arrayCharacters}`)
 		.then((response) => response.json())
@@ -95,7 +95,7 @@ let getCharacters = (arrayCharacters) => {
 //initialize all variables
 
 let initElements = () => {
-	ternary = { assasin: false, weapon: false, room: false };
+	ternary = { assasin: null, weapon: null, room: null };
 
 	container_loader = document.getElementById("container-loader");
 
@@ -115,6 +115,8 @@ let initElements = () => {
 	containerScore = document.getElementById("container-score");
 	localStorage.setItem("num_hearts", 3);
 	localStorage.setItem("score", 1200);
+
+	btn_check_mistery = document.getElementById("check-mistery");
 
 	// console.log("num_hearts init", localStorage.getItem("num_hearts"));
 };
@@ -203,7 +205,6 @@ let showSolutionMistery = () => {
 		html: `<p class="txt-winner"> Felicidades, el asesino es <span> ${name_assasin.name} </span>,
 			mato a <span>${name_murdered.name} </span> con la <span>${weaponsArray[id_weapon].name}</span> en la <span>${roomsArray[id_room].name} </span> </p>`,
 		position: "center",
-		showCancelButton: true,
 		confirmButtonText: "Jugar nuevamente",
 	}).then((result) => {
 		if (result.isConfirmed) {
@@ -236,7 +237,7 @@ let showLoseAssasin = (real_assasin) => {
 		background: "#323643",
 		html: `<p class="swa-text">Perdiste el asesino era <span> ${real_assasin.name} </span> <br> tu puntajes es de <span> ${score} </span> </p>`,
 		position: "center",
-		showCancelButton: true,
+
 		confirmButtonText: "Jugar nuevamente",
 	}).then((result) => {
 		if (result.isConfirmed) {
@@ -257,7 +258,7 @@ let showLoseWeapon = (idWeapon) => {
 		imageUrl: `${PATH_IMGS}weapons/${weaponsArray[idWeapon].name_image}.png`,
 		html: `<p class="swa-text"> Perdiste el arma era la <span> ${weaponsArray[idWeapon].name} </span> <br> tu puntajes es de <span>  ${score} </span>  </p>`,
 		position: "center",
-		showCancelButton: true,
+
 		confirmButtonText: "Jugar nuevamente",
 	}).then((result) => {
 		if (result.isConfirmed) {
@@ -278,7 +279,6 @@ let showLoseRoom = (idRoom) => {
 		imageUrl: `${PATH_IMGS}weapons/${roomsArray[idRoom].name_image}.png`,
 		html: `<p class="swa-text">  Perdiste el lugar era la <span>  ${roomsArray[idRoom].name} </span> <br> tu puntajes es de  <span>  ${score}  </span>  </p>`,
 		position: "center",
-		showCancelButton: true,
 		confirmButtonText: "Jugar nuevamente",
 	}).then((result) => {
 		if (result.isConfirmed) {
@@ -291,7 +291,9 @@ let showLoseRoom = (idRoom) => {
 
 //Tick card of assasin
 let tickCardAssasin = (id_suspect) => {
-	if (ternary.assasin == false) {
+	console.log("ternary asesino", ternary.assasin);
+
+	if (ternary.assasin == null) {
 		cardAssasin = document.getElementById(`cardId-assasin-${id_suspect}`);
 		console.log("cardAssasin", cardAssasin);
 		cardAssasin.classList = "selected-card";
@@ -299,11 +301,15 @@ let tickCardAssasin = (id_suspect) => {
 	} else {
 		swatAssasinChosen();
 	}
+
+	console.log("ternary asesino", ternary.assasin);
 };
 
 //Tick card of weapon
 let tickCardWeapon = (id_weapon) => {
-	if (ternary.weapon == false) {
+	console.log("ternary weapon", ternary.weapon);
+
+	if (ternary.weapon == null) {
 		cardWeapon = document.getElementById(`cardId-weapon-${id_weapon}`);
 		console.log("cardweapon", cardWeapon);
 		cardWeapon.classList = "selected-card";
@@ -311,11 +317,14 @@ let tickCardWeapon = (id_weapon) => {
 	} else {
 		swatWeaponChosen();
 	}
+	console.log("ternary weapon", ternary.weapon);
 };
 
 //Tick card of weapon
 let tickCardRoom = (id_room) => {
-	if (ternary.room == false) {
+	console.log("ternary room", ternary.room);
+
+	if (ternary.room == null) {
 		cardRoom = document.getElementById(`cardId-room-${id_room}`);
 		console.log("cardRoom", cardRoom);
 		cardRoom.classList = "selected-card";
@@ -323,6 +332,7 @@ let tickCardRoom = (id_room) => {
 	} else {
 		swatRoomChosen();
 	}
+	console.log("ternary room", ternary.room);
 };
 
 //Verify who is the killer
@@ -594,7 +604,7 @@ let paintingWeapons = (arrWeapons) => {
 };
 
 let paintingRooms = (arrRooms) => {
-	console.log("containerRooms", containerRooms);
+	// console.log("containerRooms", containerRooms);
 
 	containerRooms.innerHTML = "";
 
@@ -630,7 +640,7 @@ let genereMistery = (arrayWithoutMurdered, numPersonMurdered) => {
 		(element) => element.id
 	);
 
-	console.log("arrayIdsWithoutMurdered", arrayIdsWithoutMurdered);
+	// console.log("arrayIdsWithoutMurdered", arrayIdsWithoutMurdered);
 
 	numAssesin = parseInt(doRandom(arrayIdsWithoutMurdered));
 	numWeapon = parseInt(doRandom(weaponsArray));
@@ -652,7 +662,88 @@ let paintCase = (id_murder, suspectsArray) => {
 
 	person_died = suspectsArray.find(({ id }) => id === id_murder);
 	person_murder.innerHTML = `Mataron a <span> ${person_died.name} </span> tienes que adivinar quién fue, con qué lo mato y donde lo mató`;
+	btn_check_mistery.onclick = () => checkMistery();
 };
+
+//Verify if the cards choosen solved the mistery
+
+let checkMistery = () => {
+	id_assasin_real = parseInt(localStorage.getItem("id_assasin"));
+	id_weapon_real = parseInt(localStorage.getItem("id_weapon"));
+	id_room_real = parseInt(localStorage.getItem("id_room"));
+
+	console.log(ternary.assasin, id_assasin_real);
+	console.log(ternary.weapon, id_weapon_real);
+	console.log(ternary.room, id_room_real);
+
+	if (
+		ternary.assasin == id_assasin_real &&
+		ternary.weapon == id_weapon_real &&
+		ternary.room == id_room_real
+	) {
+		swatWin();
+	} else {
+		swatTryAgain();
+	}
+};
+
+let swatWin = () => {
+	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
+
+	id_assasin = localStorage.getItem("id_assasin");
+	id_person_died = localStorage.getItem("id_died");
+	id_weapon = localStorage.getItem("id_weapon");
+	id_room = localStorage.getItem("id_room");
+
+	name_assasin = suspectsArray.find((suspect) => suspect.id == id_assasin);
+	name_murdered = suspectsArray.find((suspect) => suspect.id == id_person_died);
+
+	Swal.fire({
+		imageUrl: ` ${name_assasin.image}`,
+		imageWidth: 300,
+		width: 300,
+		imageHeight: 300,
+		background: "#323643",
+		html: `<p class="txt-winner"> Felicidades, el asesino es <span> ${name_assasin.name} </span>,
+			mato a <span>${name_murdered.name} </span> con la <span>${weaponsArray[id_weapon].name}</span> en la <span>${roomsArray[id_room].name} </span> </p>`,
+		position: "center",
+
+		confirmButtonText: "Jugar nuevamente",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			rebootGame();
+		} else if (result.isDenied) {
+			Swal.fire("Adios", "", "error");
+		}
+	});
+};
+
+let swatTryAgain = () => {
+	Swal.fire({
+		toast: true,
+		// imageUrl: `${PATH_IMGS}weapons/${name_image}_cross.png`,
+		imageWidth: 300,
+		width: 300,
+		imageHeight: 300,
+		background: "#323643",
+		html: `<p class="txt-fail"> Intenta de nuevo </p>`,
+		position: "center",
+		showConfirmButton: false,
+		timer: 1500,
+		timerProgressBar: true,
+	});
+
+	cardAssasin = document.getElementById(`cardId-assasin-${ternary.assasin}`);
+	cardWeapon = document.getElementById(`cardId-weapon-${ternary.weapon}`);
+	cardRoom = document.getElementById(`cardId-room-${ternary.room}`);
+
+	cardAssasin.classList.remove("selected-card");
+	cardWeapon.classList.remove("selected-card");
+	cardRoom.classList.remove("selected-card");
+
+	(ternary.weapon = null), (ternary.assasin = null), (ternary.room = null);
+};
+
 //painting hearts
 
 let paintHearts = (num_hearts) => {
@@ -814,7 +905,7 @@ let manageLoader = () => {
 	container_loader = document.getElementById("container-loader");
 
 	console.log("remove antes", container_loader);
-	container_loader.remove("show");
+	container_loader.classList.remove("loading");
 	console.log("remove despues", container_loader);
 };
 
