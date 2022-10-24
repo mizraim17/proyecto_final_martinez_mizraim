@@ -729,7 +729,7 @@ let swatTryAgain = () => {
 		html: `<p class="txt-fail"> Intenta de nuevo </p>`,
 		position: "center",
 		showConfirmButton: false,
-		timer: 1500,
+		timer: 1700,
 		timerProgressBar: true,
 	});
 
@@ -741,9 +741,33 @@ let swatTryAgain = () => {
 	cardWeapon.classList.remove("selected-card");
 	cardRoom.classList.remove("selected-card");
 
+	decreaseHearts();
+
+	if (ternary.assasin == id_assasin_real) {
+		swatSuspectFail(ternary.assasin);
+	}
+
+	if (ternary.weapon == id_weapon_real) {
+	}
+	if (ternary.room == id_room_real9) {
+	}
+
 	(ternary.weapon = null), (ternary.assasin = null), (ternary.room = null);
 };
 
+//decrease heart
+let decreaseHearts = () => {
+	console.log("num_hearts", num_hearts);
+
+	num_hearts = parseInt(localStorage.getItem("num_hearts"));
+	num_hearts--;
+
+	localStorage.setItem("num_hearts", num_hearts);
+
+	console.log("num_hearts", num_hearts);
+
+	paintHearts(num_hearts);
+};
 //painting hearts
 
 let paintHearts = (num_hearts) => {
@@ -815,28 +839,6 @@ let swatRoomChosen = () => {
 		timerProgressBar: true,
 		timer: 2000,
 	});
-};
-
-let swatSuspectFail = (posible_assasin, real_assasin) => {
-	Swal.fire({
-		toast: true,
-		imageUrl: ` ${posible_assasin.image}`,
-		imageWidth: 300,
-		width: 300,
-		imageHeight: 300,
-		background: "#323643",
-		html: `<p class="txt-fail"> Fallaste, el asesino no es <span> ${posible_assasin.name} </span> </p>`,
-		position: "center",
-		showConfirmButton: false,
-		timerProgressBar: true,
-		timer: 1500,
-	});
-
-	checkScore();
-
-	num_hearts == 0
-		? showLoseAssasin(real_assasin)
-		: console.log(" no es 0--------------");
 };
 
 let swatWeaponsFail = (weaponsArray) => {
