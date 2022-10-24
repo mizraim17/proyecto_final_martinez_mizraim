@@ -216,10 +216,9 @@ div.swal2-popup.swal2-toast {
   height: 23em;
   animation: spin 1s linear infinite; }
 
-.container__img{
-	max-width: 200px;
-  max-height: 250px;
-}
+.container__img {
+  max-width: 200px;
+  max-height: 250px; }
 
 @keyframes spin {
   0% {

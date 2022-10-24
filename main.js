@@ -30,8 +30,8 @@ const weaponsArray = [
 	new arraysGames(0, "Olla", "olla"),
 	new arraysGames(1, "Limonada Mexicana", "limonada"),
 	new arraysGames(2, "Pistola", "pistola"),
-	new arraysGames(3, "Pistola de soldar", "soplete"),
-	new arraysGames(4, "Engrapadora en gelatina", "engrapadora"),
+	new arraysGames(3, "Engrapadora en gelatina", "engrapadora"),
+	new arraysGames(4, "Pistola de soldar", "soplete"),
 ];
 
 //Function generate number random depending of size of array
@@ -289,28 +289,39 @@ let showLoseRoom = (idRoom) => {
 	});
 };
 
-let untickCard = (id_suspect) => {
-		cardAssasin = document.getElementById(`cardId-assasin-${id_suspect}`);
-	cardAssasin.classList.remove('selected-card')
-	ternary.assasin = null
-}
+let untickCard = (id, id_untick) => {
+	switch (id_untick) {
+		case "assasin":
+			cardAssasin = document.getElementById(`cardId-assasin-${id}`);
+			cardAssasin.classList.remove("selected-card");
+			ternary.assasin = null;
+			break;
+
+		case "weapon":
+			cardweapon = document.getElementById(`cardId-weapon-${id}`);
+			cardweapon.classList.remove("selected-card");
+			ternary.weapon = null;
+			break;
+		case "room":
+			cardroom = document.getElementById(`cardId-room-${id}`);
+			cardroom.classList.remove("selected-card");
+			ternary.room = null;
+			break;
+	}
+};
 
 //Tick card of assasin
 let tickCardAssasin = (id_suspect) => {
-	console.log("ternary asesino", ternary.assasin);
+	id_untick = "assasin";
 
 	if (ternary.assasin == null) {
 		cardAssasin = document.getElementById(`cardId-assasin-${id_suspect}`);
 		console.log("cardAssasin", cardAssasin);
 		cardAssasin.classList = "selected-card";
 		ternary.assasin = id_suspect;
-	} else
-		if (ternary.assasin == id_suspect) {
-
-untickCard(id_suspect )
-		
-	}else
-	{
+	} else if (ternary.assasin == id_suspect) {
+		untickCard(id_suspect, id_untick);
+	} else {
 		swatAssasinChosen();
 	}
 
@@ -321,11 +332,15 @@ untickCard(id_suspect )
 let tickCardWeapon = (id_weapon) => {
 	console.log("ternary weapon", ternary.weapon);
 
+	id_untick = "weapon";
+
 	if (ternary.weapon == null) {
 		cardWeapon = document.getElementById(`cardId-weapon-${id_weapon}`);
 		console.log("cardweapon", cardWeapon);
 		cardWeapon.classList = "selected-card";
 		ternary.weapon = id_weapon;
+	} else if (ternary.weapon == id_weapon) {
+		untickCard(id_weapon, id_untick);
 	} else {
 		swatWeaponChosen();
 	}
@@ -335,12 +350,14 @@ let tickCardWeapon = (id_weapon) => {
 //Tick card of weapon
 let tickCardRoom = (id_room) => {
 	console.log("ternary room", ternary.room);
-
+	id_untick = "room";
 	if (ternary.room == null) {
 		cardRoom = document.getElementById(`cardId-room-${id_room}`);
 		console.log("cardRoom", cardRoom);
 		cardRoom.classList = "selected-card";
 		ternary.room = id_room;
+	} else if (ternary.room == id_room) {
+		untickCard(id_room, id_untick);
 	} else {
 		swatRoomChosen();
 	}
@@ -721,7 +738,7 @@ let swatWin = () => {
  <div class="row">
     <div class="col-12">
       <p class="txt-winner"> Felicidades, el asesino es <span> ${name_assasin.name} </span> </p>
-      <img src="${name_assasin.image}" >
+      <img src="${name_assasin.image}" class="container__img">
       <div class="row">
         <div class="col-4">
           <p class="txt-winner"> asesinó a<span> ${name_murdered.name}  </span> </p>
@@ -783,7 +800,7 @@ let swatTryAgain = () => {
 
 	if (ternary.weapon == id_weapon_real) {
 	}
-	if (ternary.room == id_room_real9) {
+	if (ternary.room == id_room_real) {
 	}
 
 	(ternary.weapon = null), (ternary.assasin = null), (ternary.room = null);

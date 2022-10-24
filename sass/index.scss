@@ -276,7 +276,7 @@ div.swal2-popup.swal2-toast {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(32, 24, 24, 0.745);
+	background-color: rgba(55, 24, 24, 0.745);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -298,12 +298,10 @@ div.swal2-popup.swal2-toast {
 	animation: spin 1s linear infinite;
 }
 
-
-.container__img{
+.container__img {
 	max-width: 200px;
-  max-height: 250px;
+	max-height: 250px;
 }
-
 
 @keyframes spin {
 	0% {
