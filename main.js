@@ -697,10 +697,11 @@ let swatWin = () => {
 	name_assasin = suspectsArray.find((suspect) => suspect.id == id_assasin);
 	name_murdered = suspectsArray.find((suspect) => suspect.id == id_person_died);
 
+	console.log("weaponsArray ", weaponsArray[id_weapon]);
+
 	Swal.fire({
-		imageUrl: ` ${name_assasin.image}`,
 		imageWidth: 300,
-		width: 300,
+		width: 800,
 		imageHeight: 300,
 		background: "#323643",
 		html: `
@@ -708,19 +709,19 @@ let swatWin = () => {
  <div class="row">
     <div class="col-12">
       <p class="txt-winner"> Felicidades, el asesino es <span> ${name_assasin.name} </span> </p>
-      <img src="${real_assasin.image} >
+      <img src="${name_assasin.image}" >
       <div class="row">
         <div class="col-4">
-          <p class="txt-winner"> asesinaron a <span> ${name_assasin.name}  </span> </p>
-          <img src="${real_assasin.image}"  >
+          <p class="txt-winner"> asesino<span> ${name_murdered.name}  </span> </p>
+          <img src="${name_murdered.image}"  >
         </div>
         <div class="col-4">
           <p class="txt-winner"> con la <span> ${weaponsArray[id_weapon].name} </span> </p>
-          <img src="${weaponsArray[id_weapon].image}"  >
+          <img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png" >
         </div>
         <div class="col-4">
           <p class="txt-winner"> en <span>la ${roomsArray[id_room].name} </span> </p>
-          <img src="${roomsArray[id_room].image}" >
+          <img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png" >
         </div>
       </div>
     </div>
