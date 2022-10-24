@@ -446,7 +446,6 @@ let showAssasin = (real_assasin, suspectsArray) => {
 		column.className = "col-12  col-md-6  mt-3";
 		column.id = `character-${real_assasin.id}`;
 		column.innerHTML = `
-
 		<div class="card text-bg-dark mb-3" style="max-width: 640px;">
   		<div class="row g-0">
 				<div class="col-md-4">
@@ -704,8 +703,30 @@ let swatWin = () => {
 		width: 300,
 		imageHeight: 300,
 		background: "#323643",
-		html: `<p class="txt-winner"> Felicidades, el asesino es <span> ${name_assasin.name} </span>,
-			mato a <span>${name_murdered.name} </span> con la <span>${weaponsArray[id_weapon].name}</span> en la <span>${roomsArray[id_room].name} </span> </p>`,
+		html: `
+
+ <div class="row">
+    <div class="col-12">
+      <p class="txt-winner"> Felicidades, el asesino es <span> ${name_assasin.name} </span> </p>
+      <img src="${real_assasin.image} >
+      <div class="row">
+        <div class="col-4">
+          <p class="txt-winner"> asesinaron a <span> ${name_assasin.name}  </span> </p>
+          <img src="${real_assasin.image}"  >
+        </div>
+        <div class="col-4">
+          <p class="txt-winner"> con la <span> ${weaponsArray[id_weapon].name} </span> </p>
+          <img src="${weaponsArray[id_weapon].image}"  >
+        </div>
+        <div class="col-4">
+          <p class="txt-winner"> en <span>la ${roomsArray[id_room].name} </span> </p>
+          <img src="${roomsArray[id_room].image}" >
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+ 	`,
 		position: "center",
 
 		confirmButtonText: "Jugar nuevamente",
