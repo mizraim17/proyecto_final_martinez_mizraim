@@ -289,6 +289,12 @@ let showLoseRoom = (idRoom) => {
 	});
 };
 
+let untickCard = (id_suspect) => {
+		cardAssasin = document.getElementById(`cardId-assasin-${id_suspect}`);
+	cardAssasin.classList.remove('selected-card')
+	ternary.assasin = null
+}
+
 //Tick card of assasin
 let tickCardAssasin = (id_suspect) => {
 	console.log("ternary asesino", ternary.assasin);
@@ -298,7 +304,13 @@ let tickCardAssasin = (id_suspect) => {
 		console.log("cardAssasin", cardAssasin);
 		cardAssasin.classList = "selected-card";
 		ternary.assasin = id_suspect;
-	} else {
+	} else
+		if (ternary.assasin == id_suspect) {
+
+untickCard(id_suspect )
+		
+	}else
+	{
 		swatAssasinChosen();
 	}
 
@@ -712,16 +724,16 @@ let swatWin = () => {
       <img src="${name_assasin.image}" >
       <div class="row">
         <div class="col-4">
-          <p class="txt-winner"> asesino<span> ${name_murdered.name}  </span> </p>
-          <img src="${name_murdered.image}"  >
+          <p class="txt-winner"> asesinó a<span> ${name_murdered.name}  </span> </p>
+          <img src="${name_murdered.image}" class="container__img"  >
         </div>
         <div class="col-4">
           <p class="txt-winner"> con la <span> ${weaponsArray[id_weapon].name} </span> </p>
-          <img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png" >
+          <img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png"  class="container__img" >
         </div>
         <div class="col-4">
-          <p class="txt-winner"> en <span>la ${roomsArray[id_room].name} </span> </p>
-          <img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png" >
+          <p class="txt-winner"> en la <span> ${roomsArray[id_room].name} </span> </p>
+          <img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png"  class="container__img" >
         </div>
       </div>
     </div>
