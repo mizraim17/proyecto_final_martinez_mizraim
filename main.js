@@ -316,7 +316,7 @@ let tickCardAssasin = (id_suspect) => {
 
 	if (ternary.assasin == null) {
 		cardAssasin = document.getElementById(`cardId-assasin-${id_suspect}`);
-		console.log("cardAssasin", cardAssasin);
+		// console.log("cardAssasin", cardAssasin);
 		cardAssasin.classList = "selected-card";
 		ternary.assasin = id_suspect;
 	} else if (ternary.assasin == id_suspect) {
@@ -330,13 +330,11 @@ let tickCardAssasin = (id_suspect) => {
 
 //Tick card of weapon
 let tickCardWeapon = (id_weapon) => {
-	console.log("ternary weapon", ternary.weapon);
-
 	id_untick = "weapon";
 
 	if (ternary.weapon == null) {
 		cardWeapon = document.getElementById(`cardId-weapon-${id_weapon}`);
-		console.log("cardweapon", cardWeapon);
+		// console.log("cardweapon", cardWeapon);
 		cardWeapon.classList = "selected-card";
 		ternary.weapon = id_weapon;
 	} else if (ternary.weapon == id_weapon) {
@@ -353,7 +351,7 @@ let tickCardRoom = (id_room) => {
 	id_untick = "room";
 	if (ternary.room == null) {
 		cardRoom = document.getElementById(`cardId-room-${id_room}`);
-		console.log("cardRoom", cardRoom);
+		// console.log("cardRoom", cardRoom);
 		cardRoom.classList = "selected-card";
 		ternary.room = id_room;
 	} else if (ternary.room == id_room) {
@@ -700,9 +698,9 @@ let checkMistery = () => {
 	id_weapon_real = parseInt(localStorage.getItem("id_weapon"));
 	id_room_real = parseInt(localStorage.getItem("id_room"));
 
-	console.log(ternary.assasin, id_assasin_real);
-	console.log(ternary.weapon, id_weapon_real);
-	console.log(ternary.room, id_room_real);
+	// console.log(ternary.assasin, id_assasin_real);
+	// console.log(ternary.weapon, id_weapon_real);
+	// console.log(ternary.room, id_room_real);
 
 	if (
 		ternary.assasin == id_assasin_real &&
@@ -735,28 +733,27 @@ let swatWin = () => {
 		background: "#323643",
 		html: `
 
- <div class="row">
-    <div class="col-12">
-      <p class="txt-winner"> Felicidades, el asesino es <span> ${name_assasin.name} </span> </p>
-      <img src="${name_assasin.image}" class="container__img">
-      <div class="row">
-        <div class="col-4">
-          <p class="txt-winner"> asesinó a<span> ${name_murdered.name}  </span> </p>
-          <img src="${name_murdered.image}" class="container__img"  >
-        </div>
-        <div class="col-4">
-          <p class="txt-winner"> con la <span> ${weaponsArray[id_weapon].name} </span> </p>
-          <img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png"  class="container__img" >
-        </div>
-        <div class="col-4">
-          <p class="txt-winner"> en la <span> ${roomsArray[id_room].name} </span> </p>
-          <img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png"  class="container__img" >
-        </div>
-      </div>
-    </div>
-  </div>
- 
- 	`,
+		<div class="row">
+				<div class="col-12">
+					<p class="txt-winner"> Felicidades, el asesino es <span> ${name_assasin.name} </span> </p>
+					<img src="${name_assasin.image}" class="container__img">
+					<div class="row">
+						<div class="col-4">
+							<p class="txt-winner"> asesinó a<span> ${name_murdered.name}  </span> </p>
+							<img src="${name_murdered.image}" class="container__img"  >
+						</div>
+						<div class="col-4">
+							<p class="txt-winner"> con la <span> ${weaponsArray[id_weapon].name} </span> </p>
+							<img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png"  class="container__img" >
+						</div>
+						<div class="col-4">
+							<p class="txt-winner"> en la <span> ${roomsArray[id_room].name} </span> </p>
+							<img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png"  class="container__img" >
+						</div>
+					</div>
+				</div>
+			</div> 
+ 		`,
 		position: "center",
 
 		confirmButtonText: "Jugar nuevamente",
@@ -772,10 +769,10 @@ let swatWin = () => {
 let swatTryAgain = () => {
 	Swal.fire({
 		toast: true,
-		// imageUrl: `${PATH_IMGS}weapons/${name_image}_cross.png`,
-		imageWidth: 300,
-		width: 300,
-		imageHeight: 300,
+		imageUrl: `${PATH_IMGS}/errors/cat_sad.gif`,
+		imageWidth: 220,
+		width: 220,
+		imageHeight: 220,
 		background: "#323643",
 		html: `<p class="txt-fail"> Intenta de nuevo </p>`,
 		position: "center",
@@ -795,15 +792,71 @@ let swatTryAgain = () => {
 	decreaseHearts();
 
 	if (ternary.assasin == id_assasin_real) {
+		console.log("el juego dice que si fue -.............");
+	} else {
 		swatSuspectFail(ternary.assasin);
 	}
 
-	if (ternary.weapon == id_weapon_real) {
-	}
-	if (ternary.room == id_room_real) {
-	}
+	// if (ternary.room == id_room_real) {
+	// }
 
 	(ternary.weapon = null), (ternary.assasin = null), (ternary.room = null);
+};
+
+let getDataArray = (id) => {
+	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
+
+	dataAssasin = suspectsArray.find((suspect) => suspect.id == id);
+
+	console.log("dataAssasin", dataAssasin);
+
+	return dataAssasin;
+};
+
+let swatSuspectFail = (possibleAssassin) => {
+	dataAssasin = getDataArray(possibleAssassin);
+
+	console.log("dataAssasin--->", dataAssasin);
+
+	Swal.fire({
+		toast: true,
+		imageUrl: `${dataAssasin.image}`,
+		imageWidth: 300,
+		width: 300,
+		imageHeight: 300,
+		background: "#323643",
+		html: `<p class="txt-fail"> Fallaste, <span> 
+		 ${dataAssasin.name} no fue ${
+			dataAssasin.gender == "Male" ? "el" : "la"
+		} asesino </span> </p>`,
+		position: "center",
+		showConfirmButton: false,
+		timer: 2500,
+		timerProgressBar: true,
+	});
+
+	if (ternary.weapon == id_weapon_real) {
+	} else {
+		swatSuspectWeapon(ternary.weapon);
+	}
+};
+
+let swatSuspectWeapon = (id_weapon) => {
+	let { id, name, name_image } = weaponsArray[id_weapon];
+
+	Swal.fire({
+		toast: true,
+		imageUrl: `${PATH_IMGS}weapons/${name_image}_cross.png`,
+		imageWidth: 300,
+		width: 300,
+		imageHeight: 300,
+		background: "#323643",
+		html: `<p class="txt-fail"> Fallaste, el arma no es la <span> ${name} </span> </p>`,
+		position: "center",
+		showConfirmButton: false,
+		timer: 2500,
+		timerProgressBar: true,
+	});
 };
 
 //decrease heart
@@ -957,9 +1010,9 @@ let paintingScore = () => {
 let manageLoader = () => {
 	container_loader = document.getElementById("container-loader");
 
-	console.log("remove antes", container_loader);
+	// console.log("remove antes", container_loader);
 	container_loader.classList.remove("loading");
-	console.log("remove despues", container_loader);
+	// console.log("remove despues", container_loader);
 };
 
 let score = 12000;
