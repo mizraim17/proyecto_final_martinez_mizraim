@@ -80,11 +80,10 @@ body {
 }
 
 .selected-card {
-	border: 11px solid green;
+	border: 11px solid rgb(16, 254, 8);
 	.cardz-asssin {
-		opacity: 0.5;
+		opacity: 0.2;
 		box-shadow: 0 10px 16px 0 rgba(6, 121, 2, 0.974);
-		background-color: rgba(240, 240, 240, 0.1);
 	}
 }
 
@@ -123,14 +122,17 @@ body {
 	margin: 0 !important;
 	background: #f27c7c;
 	transition: 0.3s;
-	width: 80%;
+	width: 160px;
 	height: 264px;
-	width: 139px;
 }
 
 .cardz-weapons {
 	@extend .cardz-asssin;
 	background-color: $blue;
+}
+
+.imgs-cards {
+	width: 100%;
 }
 
 .cardz-rooms {

@@ -96,6 +96,7 @@ let getCharacters = (arrayCharacters) => {
 
 let initElements = () => {
 	ternary = { assasin: null, weapon: null, room: null };
+	ternary_game = { assasin: false, weapon: false, room: false };
 
 	container_loader = document.getElementById("container-loader");
 
@@ -584,10 +585,10 @@ let paintingCharacters = (arrSuspects) => {
 		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3 ";
 		column.id = `character-${character.id}`;
 		column.innerHTML = `
-		<div id="cardId-assasin-${character.id}"> 
+		<div id="cardId-assasin-${character.id}"  > 
 			<a href="#" id="btn-possAssesin-${character.id}"  > 
 				<div class="cardz-asssin" >		
-					<img src=" ${character.image}" id="imgId-${character.id}" class="rounded  "  style="width:100%" >
+					<img src=" ${character.image}" id="imgId-${character.id}" class="rounded imgs-cards "   >
 					<div class="container">			
 						<p class="cardz-title ">${character.name}</p>
 					</div>
@@ -611,7 +612,7 @@ let paintingWeapons = (arrWeapons) => {
 		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3";
 		column.id = `weapon-${weapon.id}`;
 		column.innerHTML = `
- 		<div id="cardId-weapon-${weapon.id}"> 
+ 		<div id="cardId-weapon-${weapon.id}" > 
 			<a href="#" id="btn-possWeapon-${weapon.id}"  >
 				<div class="cardz-weapons"  >
 					<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgId-${weapon.id}" class="rounded"  style="width:100%" >
@@ -698,18 +699,26 @@ let checkMistery = () => {
 	id_weapon_real = parseInt(localStorage.getItem("id_weapon"));
 	id_room_real = parseInt(localStorage.getItem("id_room"));
 
-	// console.log(ternary.assasin, id_assasin_real);
-	// console.log(ternary.weapon, id_weapon_real);
-	// console.log(ternary.room, id_room_real);
+	// console.log("assasin", ternary.assasin);
+	// console.log("weapon", ternary.weapon);
+	// console.log("room", ternary.room);
 
 	if (
-		ternary.assasin == id_assasin_real &&
-		ternary.weapon == id_weapon_real &&
-		ternary.room == id_room_real
+		ternary.assasin == null ||
+		ternary.weapon == null ||
+		ternary.room == null
 	) {
-		swatWin();
+		swatUncompleteTernary();
 	} else {
-		swatTryAgain();
+		if (
+			ternary.assasin == id_assasin_real &&
+			ternary.weapon == id_weapon_real &&
+			ternary.room == id_room_real
+		) {
+			swatWin();
+		} else {
+			swatTryAgain();
+		}
 	}
 };
 
@@ -766,7 +775,25 @@ let swatWin = () => {
 	});
 };
 
+let swatUncompleteTernary = () => {
+	Swal.fire({
+		toast: true,
+		imageUrl: `${PATH_IMGS}/errors/hell_no.gif`,
+		imageWidth: 220,
+		width: 220,
+		imageHeight: 220,
+		background: "#323643",
+		html: `<p class="txt-fail"> Te faltó seleccionar algo</p>`,
+		position: "center",
+		showConfirmButton: false,
+		timer: 1700,
+		timerProgressBar: true,
+	});
+};
+
 let swatTryAgain = () => {
+	console.log("entro swatTryAgain");
+
 	Swal.fire({
 		toast: true,
 		imageUrl: `${PATH_IMGS}/errors/cat_sad.gif`,
@@ -779,6 +806,8 @@ let swatTryAgain = () => {
 		showConfirmButton: false,
 		timer: 1700,
 		timerProgressBar: true,
+	}).then(() => {
+		evalueAssasin();
 	});
 
 	cardAssasin = document.getElementById(`cardId-assasin-${ternary.assasin}`);
@@ -790,17 +819,115 @@ let swatTryAgain = () => {
 	cardRoom.classList.remove("selected-card");
 
 	decreaseHearts();
+};
 
-	if (ternary.assasin == id_assasin_real) {
-		console.log("el juego dice que si fue -.............");
+let evalueAssasin = () => {
+	id_assasin_real = parseInt(localStorage.getItem("id_assasin"));
+
+	if (id_assasin_real == ternary.assasin) {
+		assasin = true;
+		swatResultAssasin(assasin);
 	} else {
-		swatSuspectFail(ternary.assasin);
+		assasin = false;
+		swatResultAssasin(assasin);
 	}
 
-	// if (ternary.room == id_room_real) {
-	// }
+	ternary.assasin = null;
+};
 
-	(ternary.weapon = null), (ternary.assasin = null), (ternary.room = null);
+let evalueWeapon = () => {
+	id_weapon_real = parseInt(localStorage.getItem("id_weapon"));
+
+	if (id_weapon_real == ternary.weapon) {
+		weapon = true;
+		swatResultWeapon(weapon);
+	} else {
+		weapon = false;
+		swatResultWeapon(weapon);
+	}
+
+	ternary.weapon = null;
+};
+let evalueRoom = () => {
+	id_room_real = parseInt(localStorage.getItem("id_room"));
+
+	if (id_room_real == ternary.room) {
+		room = true;
+		swatResultRoom(room);
+	} else {
+		room = false;
+		swatResultRoom(room);
+	}
+
+	ternary.room = null;
+};
+
+let swatResultRoom = (room) => {
+	dataRoom = roomsArray.find((wep) => wep.id == ternary.room);
+
+	room == true
+		? (message = `<p class="txt-fail">Felicidades si es ${dataRoom.name} </p>`)
+		: (message = `<p class="txt-fail"> No es ${dataRoom.name} </p>`);
+
+	Swal.fire({
+		toast: true,
+		imageUrl: `${PATH_IMGS}rooms/${dataRoom.name_image}.png`,
+		imageWidth: 220,
+		width: 220,
+		imageHeight: 220,
+		background: "#323643",
+		html: `${message}`,
+		position: "center",
+		showConfirmButton: false,
+		timer: 1900,
+		timerProgressBar: true,
+	});
+};
+
+let swatResultWeapon = (weapon) => {
+	dataWeapon = weaponsArray.find((wep) => wep.id == ternary.weapon);
+
+	weapon == true
+		? (message = `<p class="txt-fail">Felicidades si es ${dataWeapon.name} </p>`)
+		: (message = `<p class="txt-fail"> No es ${dataWeapon.name} </p>`);
+
+	Swal.fire({
+		toast: true,
+		imageUrl: `${PATH_IMGS}weapons/${dataWeapon.name_image}.png`,
+		imageWidth: 220,
+		width: 220,
+		imageHeight: 220,
+		background: "#323643",
+		html: `${message}`,
+		position: "center",
+		showConfirmButton: false,
+		timer: 1900,
+		timerProgressBar: true,
+	}).then(() => evalueRoom());
+};
+
+let swatResultAssasin = (assasin) => {
+	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
+
+	dataAssasin = suspectsArray.find((suspect) => suspect.id == ternary.assasin);
+
+	assasin == true
+		? (message = `<p class="txt-fail">Felicidades si es ${dataAssasin.name} </p>`)
+		: (message = `<p class="txt-fail"> No es ${dataAssasin.name} </p>`);
+
+	Swal.fire({
+		toast: true,
+		imageUrl: `${dataAssasin.image}`,
+		imageWidth: 220,
+		width: 220,
+		imageHeight: 220,
+		background: "#323643",
+		html: `${message}`,
+		position: "center",
+		showConfirmButton: false,
+		timer: 1900,
+		timerProgressBar: true,
+	}).then(() => evalueWeapon());
 };
 
 let getDataArray = (id) => {
