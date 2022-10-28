@@ -814,10 +814,6 @@ let swatTryAgain = () => {
 	cardWeapon = document.getElementById(`cardId-weapon-${ternary.weapon}`);
 	cardRoom = document.getElementById(`cardId-room-${ternary.room}`);
 
-	cardAssasin.classList.remove("selected-card");
-	cardWeapon.classList.remove("selected-card");
-	cardRoom.classList.remove("selected-card");
-
 	decreaseHearts();
 };
 
@@ -830,9 +826,8 @@ let evalueAssasin = () => {
 	} else {
 		assasin = false;
 		swatResultAssasin(assasin);
+		ternary.assasin = null;
 	}
-
-	ternary.assasin = null;
 };
 
 let evalueWeapon = () => {
@@ -844,9 +839,8 @@ let evalueWeapon = () => {
 	} else {
 		weapon = false;
 		swatResultWeapon(weapon);
+		ternary.weapon = null;
 	}
-
-	ternary.weapon = null;
 };
 let evalueRoom = () => {
 	id_room_real = parseInt(localStorage.getItem("id_room"));
@@ -857,13 +851,17 @@ let evalueRoom = () => {
 	} else {
 		room = false;
 		swatResultRoom(room);
+		ternary.room = null;
 	}
-
-	ternary.room = null;
 };
 
 let swatResultRoom = (room) => {
 	dataRoom = roomsArray.find((wep) => wep.id == ternary.room);
+
+	if (room) {
+	} else {
+		cardRoom.classList.remove("selected-card");
+	}
 
 	room == true
 		? (message = `<p class="txt-fail">Felicidades si es ${dataRoom.name} </p>`)
@@ -886,6 +884,11 @@ let swatResultRoom = (room) => {
 
 let swatResultWeapon = (weapon) => {
 	dataWeapon = weaponsArray.find((wep) => wep.id == ternary.weapon);
+
+	if (weapon) {
+	} else {
+		cardWeapon.classList.remove("selected-card");
+	}
 
 	weapon == true
 		? (message = `<p class="txt-fail">Felicidades si es ${dataWeapon.name} </p>`)
@@ -914,6 +917,14 @@ let swatResultAssasin = (assasin) => {
 	assasin == true
 		? (message = `<p class="txt-fail">Felicidades si es ${dataAssasin.name} </p>`)
 		: (message = `<p class="txt-fail"> No es ${dataAssasin.name} </p>`);
+
+	if (assasin) {
+	} else {
+		cardIdImage = document.getElementById(`imgId-${ternary.assasin}`);
+
+		cardIdImage.src = `${PATH_IMGS}errors/no_god.gif`;
+		cardAssasin.classList.remove("selected-card");
+	}
 
 	Swal.fire({
 		toast: true,
