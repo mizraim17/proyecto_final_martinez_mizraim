@@ -794,21 +794,7 @@ let swatUncompleteTernary = () => {
 let swatTryAgain = () => {
 	console.log("entro swatTryAgain");
 
-	Swal.fire({
-		toast: true,
-		imageUrl: `${PATH_IMGS}/errors/cat_sad.gif`,
-		imageWidth: 220,
-		width: 220,
-		imageHeight: 220,
-		background: "#323643",
-		html: `<p class="txt-fail"> Intenta de nuevo </p>`,
-		position: "center",
-		showConfirmButton: false,
-		timer: 1700,
-		timerProgressBar: true,
-	}).then(() => {
-		evalueAssasin();
-	});
+	evalueAssasin();
 
 	cardAssasin = document.getElementById(`cardId-assasin-${ternary.assasin}`);
 	cardWeapon = document.getElementById(`cardId-weapon-${ternary.weapon}`);
@@ -816,6 +802,8 @@ let swatTryAgain = () => {
 
 	decreaseHearts();
 };
+
+let showCatCry = () => {};
 
 let evalueAssasin = () => {
 	id_assasin_real = parseInt(localStorage.getItem("id_assasin"));
@@ -825,8 +813,22 @@ let evalueAssasin = () => {
 		swatResultAssasin(assasin);
 	} else {
 		assasin = false;
-		swatResultAssasin(assasin);
-		ternary.assasin = null;
+
+		Swal.fire({
+			toast: true,
+			imageUrl: `${PATH_IMGS}/errors/cat_sad.gif`,
+			imageWidth: 220,
+			width: 220,
+			imageHeight: 220,
+			background: "#323643",
+			html: `<p class="txt-fail"> Intenta de nuevo </p>`,
+			position: "center",
+			showConfirmButton: false,
+			timer: 1700,
+			timerProgressBar: true,
+		}).then(() => {
+			swatResultAssasin(assasin);
+		});
 	}
 };
 
@@ -838,6 +840,7 @@ let evalueWeapon = () => {
 		swatResultWeapon(weapon);
 	} else {
 		weapon = false;
+
 		swatResultWeapon(weapon);
 		ternary.weapon = null;
 	}
@@ -914,6 +917,8 @@ let swatResultAssasin = (assasin) => {
 
 	dataAssasin = suspectsArray.find((suspect) => suspect.id == ternary.assasin);
 
+	console.log("entro al no assesino", ternary.assasin);
+
 	assasin == true
 		? (message = `<p class="txt-fail">Felicidades si es ${dataAssasin.name} </p>`)
 		: (message = `<p class="txt-fail"> No es ${dataAssasin.name} </p>`);
@@ -925,6 +930,8 @@ let swatResultAssasin = (assasin) => {
 		cardIdImage.src = `${PATH_IMGS}errors/no_god.gif`;
 		cardAssasin.classList.remove("selected-card");
 	}
+
+	ternary.assasin = null;
 
 	Swal.fire({
 		toast: true,
