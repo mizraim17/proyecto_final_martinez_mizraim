@@ -1,116 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clue The Office</title>
-    <!-- declarate icons -->
-    <script src="https://kit.fontawesome.com/b0650f930e.js" crossorigin="anonymous"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clue The Office-Morty</title>
+  <!-- declarate icons -->
+  <script src="https://kit.fontawesome.com/b0650f930e.js" crossorigin="anonymous"></script>
 
-    <!-- declarate bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/main.css">
-  </head>
+  <!-- declarate bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="./assets/css/main.css">
+</head>
 
-  <body>
+<body>
 
-    <div class="loading show" id="container-loader">
-      <div class="spin"></div>
-    </div>
+  <div class="loading show" id="container-loader">
+    <div class="spin"></div>
+  </div>
+
+  <div class="container-fluid margin-5  ">
+    <div class="row">
 
 
-    <div class="container-fluid margin-5  ">
-      <div class="row">
+      <div class="col-12 col-md-3  colum-list-suspects ">
+        <div class="row">
+          <p id="person_murder">
 
-
-        <div class="col-12 col-md-3  colum-list-suspects ">
-          <div class="row">
-            <p id="person_murder">
+          </p>
+          <button type="button" id="check-mistery" class="btn btn-success">comprobar misterio</button>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <p class="tit-points">
+              Puntaje:
+            </p>
+            <p id="container-score">
 
             </p>
-            <button type="button" id="check-mistery" class="btn btn-success">comprobar misterio</button>
+            <p id="points">
+            </p>
           </div>
-          <div class="row">
-            <div class="col-6">
-              <p class="tit-points">
-                Puntaje:
-              </p>
-              <p id="container-score">
+          <div class="col-6">
+            <p class="tit-points">
+              Vidas:
+            </p>
+            <p id="hearts">
 
-              </p>
-              <p id="points">
-              </p>
-            </div>
-            <div class="col-6">
-              <p class="tit-points">
-                Vidas:
-              </p>
-              <p id="hearts">
-
-              </p>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="col-md-6">
-              <p class="tit-list-suspects">Lista de sospechosos</p>
-              <ul id="containerListSuspects" class="list-suspects">
-              </ul>
-              <p class="tit-list-rooms">Lista de lugares</p>
-              <ul id="containerListRooms" class="list-rooms">
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <p class="tit-list-weapons">Lista de armas</p>
-              <ul id="containerListWeapons" class="list-weapons">
-              </ul>
-            </div>
+            </p>
           </div>
         </div>
 
-        <div class="col-12 col-md-9  ">
-          <p class="tit-all-characters">
-            Lista de Sospechosos
 
-          </p>
-
-          <div id="containerCharacters" class="row  ">
-
+        <div class="row">
+          <div class="col-md-6">
+            <p class="tit-list-suspects">Lista de sospechosos</p>
+            <ul id="containerListSuspects" class="list-suspects">
+            </ul>
+            <p class="tit-list-rooms">Lista de lugares</p>
+            <ul id="containerListRooms" class="list-rooms">
+            </ul>
           </div>
-          <p class="tit-all-weapons">
-            Lista de Armas
-
-          </p>
-          <div id="containerWeapons" class="row  ">
-          </div>
-          <p class="tit-all-rooms">
-            Lista de Lugares
-
-          </p>
-
-          <div id="containerRooms" class="row  ">
+          <div class="col-md-6">
+            <p class="tit-list-weapons">Lista de armas</p>
+            <ul id="containerListWeapons" class="list-weapons">
+            </ul>
           </div>
         </div>
       </div>
+
+      <div class="col-12 col-md-9  ">
+        <p class="tit-all-characters">
+          Lista de Sospechosos
+
+        </p>
+
+        <div id="containerCharacters" class="row  ">
+
+        </div>
+        <p class="tit-all-weapons">
+          Lista de Armas
+
+        </p>
+        <div id="containerWeapons" class="row  ">
+        </div>
+        <p class="tit-all-rooms">
+          Lista de Lugares
+
+        </p>
+
+        <div id="containerRooms" class="row  ">
+        </div>
+      </div>
     </div>
+  </div>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-      crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-      crossorigin="anonymous"></script>
-    <script src="./main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+    crossorigin="anonymous"></script>
+  <script src="./main.js"></script>
 
 
-  </body>
+</body>
 
 </html>

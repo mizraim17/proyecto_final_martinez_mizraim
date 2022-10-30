@@ -76,12 +76,16 @@ body {
     font-style: italic; }
 
 #person_murder {
-  text-shadow: 1px 1px 2px black;
-  color: #6bacbf;
+  text-shadow: 1px 1px 2px #3f3f3f;
+  color: white;
   font-size: 24px;
-  font-weight: bold; }
+  font-weight: bold;
+  text-align: center; }
   #person_murder span {
     color: #f27c7c; }
+
+.img-murder {
+  filter: grayscale(1); }
 
 .container-cardz {
   max-width: 160px;
@@ -160,13 +164,15 @@ body {
 .txt-fail, .cardz-text, .txt-winner {
   font-size: 22px;
   font-weight: normal;
-  color: #f56d8f; }
+  color: white; }
   .txt-fail span, .cardz-text span, .txt-winner span {
     font-weight: 24px;
     color: tomato;
     font-weight: bold; }
     .txt-fail span :nth-child(2), .cardz-text span :nth-child(2), .txt-winner span :nth-child(2) {
       color: gold; }
+  .txt-fail span.txt-win, .cardz-text span.txt-win, .txt-winner span.txt-win {
+    color: gold; }
 
 .txt-na-na {
   color: #f56d8f;

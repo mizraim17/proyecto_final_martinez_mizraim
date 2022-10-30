@@ -111,14 +111,22 @@ body {
 }
 
 #person_murder {
-	text-shadow: 1px 1px 2px black;
-	color: $blue;
+	text-shadow: 1px 1px 2px rgb(63, 63, 63);
+	color: white;
 	font-size: 24px;
 	font-weight: bold;
+	text-align: center;
 
 	span {
 		color: $rose;
 	}
+}
+
+
+
+.img-murder{
+filter: grayscale(1)
+// filter: hue-rotate(300deg);
 }
 
 .container-cardz {
@@ -130,7 +138,7 @@ body {
 .cardz-asssin {
 	border-radius: 15px;
 	margin: 0 !important;
-	background: #f27c7c;
+	background: $rose;
 	transition: 0.3s;
 	width: 160px;
 	height: 264px;
@@ -226,7 +234,7 @@ body {
 .txt-fail {
 	font-size: 22px;
 	font-weight: normal;
-	color: #f56d8f;
+	color: white;
 
 	span {
 		font-weight: 24px;
@@ -236,6 +244,10 @@ body {
 		:nth-child(2) {
 			color: gold;
 		}
+	}
+
+	span.txt-win{
+		color: gold;
 	}
 }
 

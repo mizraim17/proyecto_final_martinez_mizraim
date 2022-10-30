@@ -132,7 +132,7 @@ let crossListSuspect = (idSuspect) => {
 };
 
 let crossListWeapon = (idWeapon) => {
-	// console.log("idWeapon--------->", idWeapon);
+	console.log("idWeapon--------->", idWeapon);
 	id_weapon = idWeapon;
 	suspect_list = document.getElementById(`list-weapons-${id_weapon}`);
 	// console.log("weapon_list", suspect_list);
@@ -317,7 +317,6 @@ let tickCardAssasin = (id_suspect) => {
 
 	if (ternary.assasin == null) {
 		cardAssasin = document.getElementById(`cardId-assasin-${id_suspect}`);
-		// console.log("cardAssasin", cardAssasin);
 		cardAssasin.classList.add("selected-card");
 		ternary.assasin = id_suspect;
 	} else if (ternary.assasin == id_suspect) {
@@ -477,7 +476,7 @@ let showAssasin = (real_assasin, suspectsArray) => {
 		<div class="card text-bg-dark mb-3" style="max-width: 640px;">
   		<div class="row g-0">
 				<div class="col-md-4">
-					<img src="${real_assasin.image}" id="imgId-${real_assasin.id}" class="card-img-top " alt="...">
+					<img src="${real_assasin.image}" id="imgIdSus-${real_assasin.id}" class="card-img-top " alt="...">
 				</div>
 				<div class="col-md-8">
 					<div class="card-body">
@@ -514,7 +513,7 @@ let showWeapon = () => {
 		<div class="card text-bg-dark mb-3" style="max-width: 640px;">
   		<div class="row g-0">
 				<div class="col-md-4">
-					<img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png" id="imgId-${weaponsArray[id_weapon].id}" class="card-img-top " alt="...">
+					<img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png" id="imgIdWea-${weaponsArray[id_weapon].id}" class="card-img-top " alt="...">
 				</div>
 				<div class="col-md-8">
 					<div class="card-body">
@@ -552,7 +551,7 @@ let showRooms = () => {
 		<div class="card text-bg-dark mb-3" style="max-width: 640px;">
   		<div class="row g-0">
 				<div class="col-md-4">
-					<img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png" id="imgId-${roomsArray[id_room].id}" class="card-img-top " alt="...">
+					<img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png" id="imgIdRoom-${roomsArray[id_room].id}" class="card-img-top " alt="...">
 	 			</div>
 				<div class="col-md-8">
 					<div class="card-body">
@@ -589,7 +588,7 @@ let paintingSuspects = (arrSuspects) => {
 			<a href="#" id="btn-possAssesin-${character.id}"  > 
 				<div class="cardz-asssin" >	
 				<figure>
-					<img src=" ${character.image}" id="imgId-${character.id}" class="rounded img-fluid"   >
+					<img src=" ${character.image}" id="imgIdSus-${character.id}" class="rounded img-fluid"   >
 				</figure>
 				<div class="container-name">			
 					<p class="cardz-title ">${character.name}</p>
@@ -617,7 +616,7 @@ let paintingWeapons = (arrWeapons) => {
  		<div id="cardId-weapon-${weapon.id}" > 
 			<a href="#" id="btn-possWeapon-${weapon.id}"  >
 				<div class="cardz-weapons"  >
-					<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgId-${weapon.id}" class="rounded"  style="width:100%" >
+					<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgIdWea-${weapon.id}" class="rounded"  style="width:100%" >
 					<div class="container">
 						<p class="cardz-title">${weapon.name}</p>
 					</div>
@@ -646,7 +645,7 @@ let paintingRooms = (arrRooms) => {
 		 	<div id="cardId-room-${rooms.id}"> 
 				<a href="#" id="btn-poss-rooms-${rooms.id}"  >
 					<div class="cardz-rooms"  >
-						<img src="${PATH_IMGS}rooms/${rooms.name_image}.png" id="imgId-${rooms.id}" class="rounded"  style="width:100%" >
+						<img src="${PATH_IMGS}rooms/${rooms.name_image}.png" id="imgIdRoom-${rooms.id}" class="rounded"  style="width:100%" >
 						<div class="container">
 							<p class="cardz-title">${rooms.name}</p>
 						</div>
@@ -690,7 +689,9 @@ let paintCase = (id_murder, suspectsArray) => {
 	// console.log("id_murder, suspectsArray", id_murder);
 
 	person_died = suspectsArray.find(({ id }) => id === id_murder);
-	person_murder.innerHTML = `Mataron a <span> ${person_died.name} </span> tienes que adivinar quién fue, con qué lo mato y donde lo mató`;
+	person_murder.innerHTML = `Mataron a <br>
+	 <span> ${person_died.name} </span> <img class="img-murder rounded" src="${person_died.image}"> 
+	  tienes que adivinar quién fue, con qué lo mato y dónde lo mató`;
 	btn_check_mistery.onclick = () => checkMistery();
 };
 
@@ -746,19 +747,20 @@ let swatWin = () => {
 
 		<div class="row">
 				<div class="col-12">
-					<p class="txt-winner"> Felicidades, el asesino es <span> ${name_assasin.name} </span> </p>
+					<p class="txt-winner"> Felicidades, el asesino es <br> <span> ${name_assasin.name} </span> </p>
 					<img src="${name_assasin.image}" class="container__img">
 					<div class="row">
-						<div class="col-4">
-							<p class="txt-winner"> asesinó a<span> ${name_murdered.name}  </span> </p>
+						<div class="col-4 mt-2">
+							<p class="txt-winner"> asesinó a<span> <br>
+							 ${name_murdered.name}  </span> </p>
 							<img src="${name_murdered.image}" class="container__img"  >
 						</div>
 						<div class="col-4">
-							<p class="txt-winner"> con la <span> ${weaponsArray[id_weapon].name} </span> </p>
+							<p class="txt-winner"> con la <span> <br> ${weaponsArray[id_weapon].name} </span> </p>
 							<img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png"  class="container__img" >
 						</div>
 						<div class="col-4">
-							<p class="txt-winner"> en la <span> ${roomsArray[id_room].name} </span> </p>
+							<p class="txt-winner"> en la <span> <br> ${roomsArray[id_room].name} </span> </p>
 							<img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png"  class="container__img" >
 						</div>
 					</div>
@@ -834,6 +836,33 @@ let evalueAssasin = () => {
 	}
 };
 
+let evalueRoom = () => {
+	id_room_real = parseInt(localStorage.getItem("id_room"));
+
+	if (id_room_real == ternary.room) {
+		room = true;
+		swatResultRoom(room);
+	} else {
+		room = false;
+
+		Swal.fire({
+			toast: true,
+			imageUrl: `${PATH_IMGS}/errors/cat_sad.gif`,
+			imageWidth: 220,
+			width: 220,
+			imageHeight: 220,
+			background: "#323643",
+			html: `<p class="txt-fail"> Intenta de nuevo </p>`,
+			position: "center",
+			showConfirmButton: false,
+			timer: 1700,
+			timerProgressBar: true,
+		}).then(() => {
+			swatResultRoom(room);
+		});
+	}
+};
+
 let evalueWeapon = () => {
 	id_weapon_real = parseInt(localStorage.getItem("id_weapon"));
 
@@ -843,20 +872,21 @@ let evalueWeapon = () => {
 	} else {
 		weapon = false;
 
-		swatResultWeapon(weapon);
-		ternary.weapon = null;
-	}
-};
-let evalueRoom = () => {
-	id_room_real = parseInt(localStorage.getItem("id_room"));
-
-	if (id_room_real == ternary.room) {
-		room = true;
-		swatResultRoom(room);
-	} else {
-		room = false;
-		swatResultRoom(room);
-		ternary.room = null;
+		Swal.fire({
+			toast: true,
+			imageUrl: `${PATH_IMGS}/errors/cat_sad.gif`,
+			imageWidth: 220,
+			width: 220,
+			imageHeight: 220,
+			background: "#323643",
+			html: `<p class="txt-fail"> Intenta de nuevo </p>`,
+			position: "center",
+			showConfirmButton: false,
+			timer: 1700,
+			timerProgressBar: true,
+		}).then(() => {
+			swatResultWeapon(weapon);
+		});
 	}
 };
 
@@ -869,8 +899,24 @@ let swatResultRoom = (room) => {
 	}
 
 	room == true
-		? (message = `<p class="txt-fail">Felicidades si es ${dataRoom.name} </p>`)
-		: (message = `<p class="txt-fail"> No es ${dataRoom.name} </p>`);
+		? (message = `<p class="txt-fail">Correcto si fue en  <span class="txt-win">  ${dataRoom.name} </span></p>`)
+		: (message = `<p class="txt-fail"> No es <span> ${dataRoom.name} </span> </p>`);
+
+	if (room) {
+	} else {
+		console.log("---------", ternary.room);
+
+		cardIdImage = document.getElementById(`imgIdRoom-${ternary.room}`);
+
+		console.log("cardIdImage", cardIdImage);
+
+		cardIdImage.src = `${PATH_IMGS}errors/no_god.gif`;
+		cardRoom.classList.remove("selected-card");
+
+		crossListRoom(ternary.room);
+	}
+
+	ternary.room = null;
 
 	Swal.fire({
 		toast: true,
@@ -888,6 +934,8 @@ let swatResultRoom = (room) => {
 };
 
 let swatResultWeapon = (weapon) => {
+	console.log("weapon what i send,", ternary.weapon);
+
 	dataWeapon = weaponsArray.find((wep) => wep.id == ternary.weapon);
 
 	if (weapon) {
@@ -896,8 +944,24 @@ let swatResultWeapon = (weapon) => {
 	}
 
 	weapon == true
-		? (message = `<p class="txt-fail">Felicidades si es ${dataWeapon.name} </p>`)
-		: (message = `<p class="txt-fail"> No es ${dataWeapon.name} </p>`);
+		? (message = `<p class="txt-fail">Correcto si fue con la <span class="txt-win"> ${dataWeapon.name} </span> </p>`)
+		: (message = `<p class="txt-fail"> No es <span> ${dataWeapon.name} </span> </p>`);
+
+	if (weapon) {
+	} else {
+		console.log("---------", ternary.weapon);
+
+		cardIdImage = document.getElementById(`imgIdWea-${ternary.weapon}`);
+
+		console.log("cardIdImage", cardIdImage);
+
+		cardIdImage.src = `${PATH_IMGS}errors/no_god.gif`;
+		cardWeapon.classList.remove("selected-card");
+
+		crossListWeapon(ternary.weapon);
+	}
+
+	ternary.weapon = null;
 
 	Swal.fire({
 		toast: true,
@@ -922,15 +986,16 @@ let swatResultAssasin = (assasin) => {
 	console.log("entro al no assesino", ternary.assasin);
 
 	assasin == true
-		? (message = `<p class="txt-fail">Felicidades si es ${dataAssasin.name} </p>`)
-		: (message = `<p class="txt-fail"> No es ${dataAssasin.name} </p>`);
+		? (message = `<p class="txt-fail">Correcto si es <span class="txt-win">${dataAssasin.name} </span> </p>`)
+		: (message = `<p class="txt-fail"> No es <span> ${dataAssasin.name}</span> </p>`);
 
 	if (assasin) {
 	} else {
-		cardIdImage = document.getElementById(`imgId-${ternary.assasin}`);
+		cardIdImage = document.getElementById(`imgIdSus-${ternary.assasin}`);
 
 		cardIdImage.src = `${PATH_IMGS}errors/no_god.gif`;
 		cardAssasin.classList.remove("selected-card");
+		crossListSuspect(ternary.assasin);
 	}
 
 	ternary.assasin = null;
