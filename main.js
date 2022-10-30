@@ -318,7 +318,7 @@ let tickCardAssasin = (id_suspect) => {
 	if (ternary.assasin == null) {
 		cardAssasin = document.getElementById(`cardId-assasin-${id_suspect}`);
 		// console.log("cardAssasin", cardAssasin);
-		cardAssasin.classList = "selected-card";
+		cardAssasin.classList.add("selected-card");
 		ternary.assasin = id_suspect;
 	} else if (ternary.assasin == id_suspect) {
 		untickCard(id_suspect, id_untick);
@@ -391,7 +391,7 @@ let checkAssasin = (asseMurder, id_suspect) => {
 			localStorage.setItem("num_hearts", num_hearts);
 
 			paintHearts(num_hearts);
-			paintingCharacters(arrWitMurd);
+			paintingSuspects(arrWitMurd);
 			crossListSuspect(posible_assasin.id);
 
 			playSound("lose");
@@ -573,7 +573,7 @@ let showRooms = () => {
 	}
 };
 
-let paintingCharacters = (arrSuspects) => {
+let paintingSuspects = (arrSuspects) => {
 	// console.log("arrSuspects", arrSuspects);
 
 	containerCharacters.innerHTML = "";
@@ -582,16 +582,18 @@ let paintingCharacters = (arrSuspects) => {
 	arrSuspects.forEach((character) => {
 		let column = document.createElement("div");
 
-		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3 ";
+		column.className = "col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2 mt-3 ";
 		column.id = `character-${character.id}`;
 		column.innerHTML = `
-		<div id="cardId-assasin-${character.id}"  > 
+		<div id="cardId-assasin-${character.id}" class="container-cardz"  > 
 			<a href="#" id="btn-possAssesin-${character.id}"  > 
-				<div class="cardz-asssin" >		
-					<img src=" ${character.image}" id="imgId-${character.id}" class="rounded imgs-cards "   >
-					<div class="container">			
-						<p class="cardz-title ">${character.name}</p>
-					</div>
+				<div class="cardz-asssin" >	
+				<figure>
+					<img src=" ${character.image}" id="imgId-${character.id}" class="rounded img-fluid"   >
+				</figure>
+				<div class="container-name">			
+					<p class="cardz-title ">${character.name}</p>
+				</div>
 				</div>		
 			</a>
 		</div>		
@@ -1176,7 +1178,7 @@ let main = () => {
 
 	//paints suspects, weapons and rooms in the dom
 	paintCase(numPersonMurdered, suspectsArray);
-	paintingCharacters(arrayWithoutMurdered);
+	paintingSuspects(arrayWithoutMurdered);
 	paintingWeapons(weaponsArray);
 	paintingRooms(roomsArray);
 	paintingScore(score);

@@ -79,8 +79,12 @@ body {
 	font-weight: 500;
 }
 
+.btn-check {
+	background-color: #f0ff42;
+}
+
 .selected-card {
-	border: 11px solid rgb(16, 254, 8);
+	border: 5px solid #f0ff42;
 	.cardz-asssin {
 		opacity: 0.2;
 		box-shadow: 0 10px 16px 0 rgba(6, 121, 2, 0.974);
@@ -115,6 +119,12 @@ body {
 	span {
 		color: $rose;
 	}
+}
+
+.container-cardz {
+	max-width: 160px;
+	height: 264px;
+	outline: 0 none;
 }
 
 .cardz-asssin {
@@ -160,7 +170,7 @@ body {
 	}
 }
 
-.container {
+.container-name {
 	padding: 2px 16px;
 }
 

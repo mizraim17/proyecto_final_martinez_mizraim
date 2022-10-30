@@ -53,8 +53,11 @@ body {
   font-size: 18px;
   font-weight: 500; }
 
+.btn-check {
+  background-color: #f0ff42; }
+
 .selected-card {
-  border: 11px solid #10fe08; }
+  border: 5px solid #f0ff42; }
   .selected-card .cardz-asssin, .selected-card .cardz-weapons, .selected-card .cardz-rooms {
     opacity: 0.2;
     box-shadow: 0 10px 16px 0 rgba(6, 121, 2, 0.974); }
@@ -79,6 +82,11 @@ body {
   font-weight: bold; }
   #person_murder span {
     color: #f27c7c; }
+
+.container-cardz {
+  max-width: 160px;
+  height: 264px;
+  outline: 0 none; }
 
 .cardz-asssin, .cardz-weapons, .cardz-rooms {
   border-radius: 15px;
@@ -111,7 +119,7 @@ body {
   .cardz-text span {
     color: white; }
 
-.container {
+.container-name {
   padding: 2px 16px; }
 
 .tit-all-characters, .tit-all-weapons, .tit-all-rooms {
