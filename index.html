@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clue The Office</title>
+    <title>Clue The Office-Morty</title>
     <!-- declarate icons -->
     <script src="https://kit.fontawesome.com/b0650f930e.js" crossorigin="anonymous"></script>
 
@@ -21,19 +21,23 @@
       <div class="spin"></div>
     </div>
 
-
     <div class="container-fluid margin-5  ">
       <div class="row">
 
 
         <div class="col-12 col-md-3  colum-list-suspects ">
-          <div class="row">
-            <p id="person_murder">
-
-            </p>
+          <div class="row container-case">
+            <div class="col-12">
+              <p id="full_case">
+              </p>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+              <button type="button" id="check-mistery" class="btn btn-success my-3 mx-2 btn-check-mistery">comprobar
+                misterio</button>
+            </div>
           </div>
-          <div class="row">
-            <div class="col-6">
+          <div class="row container-points">
+            <div class="col-6 col-sm-6 col-md-12 col-lg-6">
               <p class="tit-points">
                 Puntaje:
               </p>
@@ -43,7 +47,7 @@
               <p id="points">
               </p>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-6 col-md-12 col-lg-6">
               <p class="tit-points">
                 Vidas:
               </p>
@@ -54,7 +58,7 @@
           </div>
 
 
-          <div class="row">
+          <div class="row container-lists">
             <div class="col-md-6">
               <p class="tit-list-suspects">Lista de sospechosos</p>
               <ul id="containerListSuspects" class="list-suspects">

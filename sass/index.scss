@@ -19,12 +19,18 @@ a:active {
 
 // variables
 
+.btn-check-mistery {
+	font-size: 22px;
+	font-weight: bold;
+}
+
 $gray: #393e46;
 $gray-1: #3c3c3c;
 $gray-2: #606470;
 $green: #4aa96c;
 $rose: #f27c7c;
 $rose-2: #f56d8f;
+$red: #931a25;
 $blue: #6bacbf;
 
 body {
@@ -79,6 +85,18 @@ body {
 	font-weight: 500;
 }
 
+.btn-check {
+	background-color: #f0ff42;
+}
+
+.selected-card {
+	border: 5px solid #f0ff42;
+	.cardz-asssin {
+		opacity: 0.2;
+		box-shadow: 0 10px 16px 0 rgba(6, 121, 2, 0.974);
+	}
+}
+
 .name_correct {
 	color: #faffa8;
 	padding: 2%;
@@ -98,35 +116,48 @@ body {
 	}
 }
 
-#person_murder {
-	text-shadow: 1px 1px 2px black;
-	color: $blue;
+#full_case {
+	// text-shadow: 1px 1px 2px rgb(63, 63, 63);
+	color: $rose-2;
 	font-size: 24px;
 	font-weight: bold;
+	text-align: center;
 
 	span {
-		color: $rose;
+		color: white;
 	}
 }
 
-.cardz {
-	border-radius: 15px;
+.img-murder {
+	filter: grayscale(90%);
+}
 
-	background: #f27c7c;
-	// box-shadow: 2px 2px 6px #ce6969, -2px -2px 6px #ff8f8f;
+.container-cardz {
+	max-width: 160px;
+	height: 264px;
+	outline: 0 none;
+}
+
+.cardz-asssin {
+	border-radius: 15px;
+	margin: 0 !important;
+	background: $rose;
 	transition: 0.3s;
-	width: 80%;
-	height: 244px;
-	width: 139px;
+	width: 160px;
+	height: 264px;
 }
 
 .cardz-weapons {
-	@extend .cardz;
+	@extend .cardz-asssin;
 	background-color: $blue;
 }
 
+.imgs-cards {
+	width: 100%;
+}
+
 .cardz-rooms {
-	@extend .cardz;
+	@extend .cardz-asssin;
 	background-color: $green;
 }
 
@@ -137,8 +168,25 @@ body {
 	text-align: center;
 }
 
-.cardz:hover {
+.cardz-asssin:hover {
 	box-shadow: 0 10px 16px 0 rgba(255, 255, 255, 0.85);
+}
+
+.txt-fail {
+	font-size: 26px;
+	font-weight: bold;
+	color: $rose-2;
+
+	span {
+		font-weight: 24px;
+		color: white;
+		font-weight: bold;
+	}
+}
+
+.swal2-styled.swal2-confirm {
+	background-color: #e5f876 !important;
+	color: #2a2f39 !important;
 }
 
 .cardz-text {
@@ -150,7 +198,7 @@ body {
 	}
 }
 
-.container {
+.container-name {
 	padding: 2px 16px;
 }
 
@@ -181,19 +229,29 @@ body {
 	padding-right: 4px;
 }
 
+.container-points,
+.container-case,
+.container-lists {
+	background-color: $gray;
+	margin: 3% 0;
+	border-radius: 15px;
+	padding: 2%;
+}
+
 #container-score {
 	@extend .tit-points;
 	color: yellow;
 }
 
 .swa-text {
-	font-size: 22px;
-	font-weight: normal;
-	color: #f56d8f;
+	font-size: 24px;
+	font-weight: bold;
+	color: $rose-2;
+	font-style: italic;
 
 	span {
 		color: gold;
-		font-size: 24px;
+		font-size: 26px;
 		font-style: italic;
 		font-weight: bold;
 	}
@@ -203,20 +261,10 @@ body {
 	}
 }
 
-.txt-fail {
-	font-size: 22px;
-	font-weight: normal;
-	color: #f56d8f;
-
-	span {
-		font-weight: 24px;
-		color: tomato;
-		font-weight: bold;
-
-		:nth-child(2) {
-			color: gold;
-		}
-	}
+.txt-na-na {
+	color: $rose-2;
+	font-weight: bold;
+	font-weight: 26px;
 }
 
 .txt-winner {
@@ -262,7 +310,7 @@ div.swal2-popup.swal2-toast {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(32, 24, 24, 0.745);
+	background-color: rgba(55, 24, 24, 0.745);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -282,6 +330,11 @@ div.swal2-popup.swal2-toast {
 	width: 23em;
 	height: 23em;
 	animation: spin 1s linear infinite;
+}
+
+.container__img {
+	max-width: 200px;
+	max-height: 250px;
 }
 
 @keyframes spin {
