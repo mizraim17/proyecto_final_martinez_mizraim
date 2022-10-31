@@ -230,13 +230,14 @@ body {
 }
 
 .swa-text {
-	font-size: 22px;
-	font-weight: normal;
+	font-size: 24px;
+	font-weight: bold;
 	color: #f56d8f;
+	font-style: italic;
 
 	span {
 		color: gold;
-		font-size: 24px;
+		font-size: 26px;
 		font-style: italic;
 		font-weight: bold;
 	}
@@ -249,11 +250,11 @@ body {
 .txt-fail {
 	font-size: 26px;
 	font-weight: bold;
-	color: white;
+	color: $rose;
 
 	span {
 		font-weight: 24px;
-		color: tomato;
+		color: white;
 		font-weight: bold;
 
 		:nth-child(2) {

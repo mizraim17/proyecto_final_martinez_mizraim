@@ -163,12 +163,13 @@ body {
   color: yellow; }
 
 .swa-text {
-  font-size: 22px;
-  font-weight: normal;
-  color: #f56d8f; }
+  font-size: 24px;
+  font-weight: bold;
+  color: #f56d8f;
+  font-style: italic; }
   .swa-text span {
     color: gold;
-    font-size: 24px;
+    font-size: 26px;
     font-style: italic;
     font-weight: bold; }
   .swa-text span:nth-child(1) {
@@ -177,10 +178,10 @@ body {
 .txt-fail, .cardz-text, .txt-winner {
   font-size: 26px;
   font-weight: bold;
-  color: white; }
+  color: #f27c7c; }
   .txt-fail span, .cardz-text span, .txt-winner span {
     font-weight: 24px;
-    color: tomato;
+    color: white;
     font-weight: bold; }
     .txt-fail span :nth-child(2), .cardz-text span :nth-child(2), .txt-winner span :nth-child(2) {
       color: gold; }

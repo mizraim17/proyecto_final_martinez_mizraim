@@ -3,7 +3,8 @@
 //Global Variables of games
 
 let containerCharacters,
-	cardsTotalMistery = 0;
+	cardsTotalMistery = 0,
+	timeShowCards = 1000;
 
 const PATH_IMGS = "./assets/imgs/";
 
@@ -114,7 +115,7 @@ let initElements = () => {
 	full_case = document.getElementById("full_case");
 	container_hearts = document.getElementById("hearts");
 	containerScore = document.getElementById("container-score");
-	localStorage.setItem("num_hearts", 3);
+	localStorage.setItem("num_hearts", 2);
 	localStorage.setItem("score", 1200);
 
 	btn_check_mistery = document.getElementById("check-mistery");
@@ -782,7 +783,72 @@ let swatWin = () => {
 	});
 };
 
+let swatLose = () => {
+	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
+
+	id_assasin = localStorage.getItem("id_assasin");
+	id_person_died = localStorage.getItem("id_died");
+	id_weapon = localStorage.getItem("id_weapon");
+	id_room = localStorage.getItem("id_room");
+
+	name_assasin = suspectsArray.find((suspect) => suspect.id == id_assasin);
+	name_murdered = suspectsArray.find((suspect) => suspect.id == id_person_died);
+
+	console.log("weaponsArray ", weaponsArray[id_weapon]);
+
+	newPoints = parseInt(localStorage.getItem("score"));
+
+	Swal.fire({
+		imageWidth: 300,
+		width: 800,
+		imageHeight: 300,
+		background: "#323643",
+		html: `
+
+		<div class="row">
+			<div class="col-6">
+				<p class="swa-text"> Lastima Perdiste,<br> 
+				tu puntuación es de <span>  ${newPoints}  	</span>
+				</p>
+			</div>		
+				<div class="col-6">
+				<p class="txt-fail"> El asesino fue <br> <span> ${name_assasin.name} </span> </p>
+				<img src="${name_assasin.image}" class="container__img">
+			</div>		
+		</div> 
+					<div class="row">
+						<div class="col-4 mt-2">
+							<p class="txt-winner"> asesinó a<span> <br>
+							 ${name_murdered.name}  </span> </p>
+							<img src="${name_murdered.image}" class="container__img"  >
+						</div>
+						<div class="col-4">
+							<p class="txt-winner"> con la <span> <br> ${weaponsArray[id_weapon].name} </span> </p>
+							<img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png"  class="container__img" >
+						</div>
+						<div class="col-4">
+							<p class="txt-winner"> en la <span> <br> ${roomsArray[id_room].name} </span> </p>
+							<img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png"  class="container__img" >
+						</div>
+					</div>
+				</div>
+		
+ 		`,
+		position: "center",
+
+		confirmButtonText: "Jugar nuevamente",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			rebootGame();
+		} else if (result.isDenied) {
+			Swal.fire("Adios", "", "error");
+		}
+	});
+};
+
 let swatUncompleteTernary = () => {
+	console.table(ternary);
+
 	Swal.fire({
 		toast: true,
 		imageUrl: `${PATH_IMGS}/errors/hell_no.gif`,
@@ -862,7 +928,7 @@ let swatResultRoom = (room) => {
 		`${PATH_IMGS}errors/cat_sad.gif`,
 	];
 	array_congratulation = [
-		`<p class="txt-winner">Correcto si fue en la <span class="txt-win">${dataAssasin.name} el arma </span> </p>`,
+		`<p class="txt-winner">Correcto si fue en la <span class="txt-win">${dataRoom.name}  </span> </p>`,
 		`<p class="txt-winner"> Vas bien</p>`,
 		`${PATH_IMGS}errors/cat_yei.gif`,
 	];
@@ -873,8 +939,6 @@ let swatResultRoom = (room) => {
 
 	if (room) {
 	} else {
-		console.log("---------", ternary.room);
-
 		cardIdImage = document.getElementById(`imgIdRoom-${ternary.room}`);
 
 		console.log("cardIdImage", cardIdImage);
@@ -883,16 +947,20 @@ let swatResultRoom = (room) => {
 		cardRoom.classList.remove("selected-card");
 
 		crossListRoom(ternary.room);
+		ternary.room = null;
 	}
 
-	ternary.room = null;
+	console.log("num_hearts===============>", num_hearts);
 
-	Swal.fire({
-		imageWidth: 300,
-		width: 800,
-		imageHeight: 300,
-		background: "#323643",
-		html: `
+	if (num_hearts != 0) {
+		console.log("entro a dif cero===============>", num_hearts);
+
+		Swal.fire({
+			imageWidth: 300,
+			width: 800,
+			imageHeight: 300,
+			background: "#323643",
+			html: `
 		<div class="row" >
 				<div class="col-12">
 					${array_state[1]}
@@ -906,11 +974,46 @@ let swatResultRoom = (room) => {
 				</div>
 			</div> 
  		`,
-		position: "center",
-		showConfirmButton: false,
-		timer: 6500,
-		timerProgressBar: true,
-	});
+			position: "center",
+			showConfirmButton: false,
+			timer: `${timeShowCards}`,
+			timerProgressBar: true,
+		});
+	} else {
+		let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
+		id_assasin_mistery = parseInt(localStorage.getItem("id_assasin"));
+
+		//get data possible assasin choose by user
+		posible_assasin = suspectsArray.find(({ id }) => id === ternary.assasin);
+		real_assasin = suspectsArray.find(({ id }) => id === id_assasin_mistery);
+
+		ternary.room = null;
+
+		Swal.fire({
+			imageWidth: 300,
+			width: 800,
+			imageHeight: 300,
+			background: "#323643",
+			html: `
+		<div class="row" >
+				<div class="col-12">
+					${array_state[1]}
+					<img src="${array_state[2]}"  class="container__img">
+					<div class="row">
+						<div class="col-12 mt-2">
+						${array_state[0]} <br>   
+						<img src="${PATH_IMGS}rooms/${dataRoom.name_image}.png" class="container__img">
+						</div>						 
+					</div>
+				</div>
+			</div> 
+ 		`,
+			position: "center",
+			showConfirmButton: false,
+			timer: `${timeShowCards}`,
+			timerProgressBar: true,
+		}).then(() => swatLose());
+	}
 };
 
 let swatResultWeapon = (weapon) => {
@@ -919,18 +1022,13 @@ let swatResultWeapon = (weapon) => {
 	dataWeapon = weaponsArray.find((wep) => wep.id == ternary.weapon);
 	let array_state;
 
-	if (weapon) {
-	} else {
-		cardWeapon.classList.remove("selected-card");
-	}
-
 	array_sorry = [
 		`<p class="txt-fail"> Error no es la <span> ${dataWeapon.name}</span> el arma </p>`,
 		`<p class="txt-fail"> Lo siento</p>`,
 		`${PATH_IMGS}errors/cat_sad.gif`,
 	];
 	array_congratulation = [
-		`<p class="txt-winner">Correcto si es <span class="txt-win">${dataAssasin.name} el arma </span> </p>`,
+		`<p class="txt-winner">Correcto si es <span class="txt-win">${dataWeapon.name} el arma </span> </p>`,
 		`<p class="txt-winner"> Vas bien</p>`,
 		`${PATH_IMGS}errors/cat_yei.gif`,
 	];
@@ -942,7 +1040,7 @@ let swatResultWeapon = (weapon) => {
 	if (weapon) {
 	} else {
 		console.log("---------", ternary.weapon);
-
+		cardWeapon.classList.remove("selected-card");
 		cardIdImage = document.getElementById(`imgIdWea-${ternary.weapon}`);
 
 		console.log("cardIdImage", cardIdImage);
@@ -951,9 +1049,9 @@ let swatResultWeapon = (weapon) => {
 		cardWeapon.classList.remove("selected-card");
 
 		crossListWeapon(ternary.weapon);
-	}
 
-	ternary.weapon = null;
+		ternary.weapon = null;
+	}
 
 	Swal.fire({
 		imageWidth: 300,
@@ -976,7 +1074,7 @@ let swatResultWeapon = (weapon) => {
  		`,
 		position: "center",
 		showConfirmButton: false,
-		timer: 6500,
+		timer: `${timeShowCards}`,
 		timerProgressBar: true,
 	}).then(() => evalueRoom());
 };
@@ -1037,7 +1135,7 @@ let swatResultAssasin = (assasin) => {
  		`,
 		position: "center",
 		showConfirmButton: false,
-		timer: 6500,
+		timer: `${timeShowCards}`,
 		timerProgressBar: true,
 	}).then(() => evalueWeapon());
 };
@@ -1070,7 +1168,7 @@ let swatSuspectFail = (possibleAssassin) => {
 		} asesino </span> </p>`,
 		position: "center",
 		showConfirmButton: false,
-		timer: 2500,
+		timer: `${timeShowCards}`,
 		timerProgressBar: true,
 	});
 
@@ -1093,7 +1191,7 @@ let swatSuspectWeapon = (id_weapon) => {
 		html: `<p class="txt-fail"> Fallaste, el arma no es la <span> ${name} </span> </p>`,
 		position: "center",
 		showConfirmButton: false,
-		timer: 2500,
+		timer: `${timeShowCards}`,
 		timerProgressBar: true,
 	});
 };
