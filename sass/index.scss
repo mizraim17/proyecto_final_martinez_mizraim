@@ -199,7 +199,7 @@ body {
 }
 
 .container-name {
-	padding: 2px 16px;
+	padding: 2px 15px;
 }
 
 .tit-all-characters {
@@ -216,7 +216,7 @@ body {
 }
 
 .tit-all-rooms {
-	@extend .tit-all-characters;
+	@extend .tit-all-weapons;
 	color: $green;
 }
 

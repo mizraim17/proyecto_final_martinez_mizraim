@@ -140,7 +140,7 @@ body {
     color: white; }
 
 .container-name {
-  padding: 2px 16px; }
+  padding: 2px 15px; }
 
 .tit-all-characters, .tit-all-weapons, .tit-all-rooms {
   color: #f27c7c;
@@ -148,7 +148,7 @@ body {
   font-weight: 900;
   font-size: 42px; }
 
-.tit-all-weapons {
+.tit-all-weapons, .tit-all-rooms {
   padding-top: 3%;
   color: #6bacbf; }
 
