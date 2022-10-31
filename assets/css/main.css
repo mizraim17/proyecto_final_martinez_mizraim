@@ -79,10 +79,6 @@ body {
   .name_incorrect span {
     font-style: italic; }
 
-.container-case {
-  background-color: #393e46;
-  border-radius: 15px; }
-
 #full_case {
   color: #f56d8f;
   font-size: 24px;
@@ -153,7 +149,9 @@ body {
   color: #f56d8f !important;
   padding-right: 4px; }
 
-.container-points {
+.container-points,
+.container-case,
+.container-lists {
   background-color: #393e46;
   margin: 3% 0;
   border-radius: 15px;

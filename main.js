@@ -115,7 +115,7 @@ let initElements = () => {
 	full_case = document.getElementById("full_case");
 	container_hearts = document.getElementById("hearts");
 	containerScore = document.getElementById("container-score");
-	localStorage.setItem("num_hearts", 2);
+	localStorage.setItem("num_hearts", 1);
 	localStorage.setItem("score", 1200);
 
 	btn_check_mistery = document.getElementById("check-mistery");
@@ -582,18 +582,19 @@ let paintingSuspects = (arrSuspects) => {
 	arrSuspects.forEach((character) => {
 		let column = document.createElement("div");
 
-		column.className = "col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2 mt-3 ";
+		column.className =
+			"col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mt-3 ";
 		column.id = `character-${character.id}`;
 		column.innerHTML = `
 		<div id="cardId-assasin-${character.id}" class="container-cardz"  > 
 			<div id="btn-possAssesin-${character.id}"  > 
 				<div class="cardz-asssin" >	
-				<figure>
-					<img src=" ${character.image}" id="imgIdSus-${character.id}" class="rounded img-fluid"   >
-				</figure>
-				<div class="container-name">			
-					<p class="cardz-title ">${character.name}</p>
-				</div>
+					<figure>
+						<img src=" ${character.image}" id="imgIdSus-${character.id}" class="rounded img-fluid"   >
+					</figure>
+					<div class="container-name">			
+						<p class="cardz-title ">${character.name}</p>
+					</div>
 				</div>		
 			</div>
 		</div>		
@@ -611,16 +612,17 @@ let paintingWeapons = (arrWeapons) => {
 	arrWeapons.forEach((weapon) => {
 		let column = document.createElement("div");
 
-		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3";
+		column.className =
+			"col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mt-3 ";
 		column.id = `weapon-${weapon.id}`;
 		column.innerHTML = `
  		<div id="cardId-weapon-${weapon.id}" class="container-cardz"  > 
 			<div id="btn-possWeapon-${weapon.id}">
 				<div class="cardz-weapons"  >
 				<figure>	
-				<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgIdWea-${weapon.id}"   class="rounded img-fluid"   >
+					<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgIdWea-${weapon.id}"   class="rounded img-fluid"   >
 				</figure>
-				<div class="container">
+				<div class="container-name">
 						<p class="cardz-title">${weapon.name}</p>
 				</div>
 				</div>
@@ -643,7 +645,8 @@ let paintingRooms = (arrRooms) => {
 	arrRooms.forEach((rooms) => {
 		let column = document.createElement("div");
 
-		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3";
+		column.className =
+			"col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mt-3 ";
 		column.id = `rooms-${rooms.id}`;
 		column.innerHTML = `
 		 	<div id="cardId-room-${rooms.id}"> 
@@ -693,8 +696,11 @@ let paintCase = (id_murder, suspectsArray) => {
 	// console.log("id_murder, suspectsArray", id_murder);
 
 	person_died = suspectsArray.find(({ id }) => id === id_murder);
-	full_case.innerHTML = `Mataron a <br>
-	 <span> ${person_died.name} </span> <img class="img-murder rounded img-fluid" src="${person_died.image}"> 
+	full_case.innerHTML = ` Mataron a <br>
+	 <span> ${person_died.name} </span>
+	 <figure>
+	  <img class="img-murder rounded img-fluid" src="${person_died.image}"> 
+		</figure>
 	  tienes que adivinar <span>quién fue</span>, <span>con qué</span> lo mato y <span>dónde</span> lo mató`;
 	btn_check_mistery.onclick = () => checkMistery();
 };
@@ -742,11 +748,13 @@ let swatWin = () => {
 
 	console.log("weaponsArray ", weaponsArray[id_weapon]);
 
+	playSound("win");
+
 	Swal.fire({
 		imageWidth: 300,
 		width: 800,
 		imageHeight: 300,
-		background: "#323643",
+		background: "#3C4048",
 		html: `
 
 		<div class="row">
@@ -798,14 +806,16 @@ let swatLose = () => {
 
 	newPoints = parseInt(localStorage.getItem("score"));
 
+	playSound("lose");
+
 	Swal.fire({
 		imageWidth: 300,
 		width: 800,
 		imageHeight: 300,
-		background: "#323643",
+		background: "#3C4048",
 		html: `
 
-		<div class="row">
+		<div class="row ">
 			<div class="col-6">
 				<p class="swa-text"> Lastima Perdiste,<br> 
 				tu puntuación es de <span>  ${newPoints}  	</span>
@@ -816,22 +826,22 @@ let swatLose = () => {
 				<img src="${name_assasin.image}" class="container__img">
 			</div>		
 		</div> 
-					<div class="row">
-						<div class="col-4 mt-2">
-							<p class="txt-winner"> asesinó a<span> <br>
-							 ${name_murdered.name}  </span> </p>
-							<img src="${name_murdered.image}" class="container__img"  >
-						</div>
-						<div class="col-4">
-							<p class="txt-winner"> con la <span> <br> ${weaponsArray[id_weapon].name} </span> </p>
-							<img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png"  class="container__img" >
-						</div>
-						<div class="col-4">
-							<p class="txt-winner"> en la <span> <br> ${roomsArray[id_room].name} </span> </p>
-							<img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png"  class="container__img" >
-						</div>
-					</div>
-				</div>
+		<div class="row">
+			<div class="col-4 mt-2">
+				<p class="txt-winner"> asesinó a<span> <br>
+					${name_murdered.name}  </span> </p>
+				<img src="${name_murdered.image}" class="container__img"  >
+			</div>
+			<div class="col-4">
+				<p class="txt-winner"> con la <span> <br> ${weaponsArray[id_weapon].name} </span> </p>
+				<img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png"  class="container__img" >
+			</div>
+			<div class="col-4">
+				<p class="txt-winner"> en la <span> <br> ${roomsArray[id_room].name} </span> </p>
+				<img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png"  class="container__img" >
+			</div>
+		</div>
+	</div>
 		
  		`,
 		position: "center",
