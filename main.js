@@ -4,7 +4,7 @@
 
 let containerCharacters,
 	cardsTotalMistery = 0,
-	timeShowCards = 1000;
+	timeShowCards = 6000;
 
 const PATH_IMGS = "./assets/imgs/";
 
