@@ -111,7 +111,7 @@ let initElements = () => {
 	name_suspect = document.getElementById("name_suspect");
 	name_weapon = document.getElementById("name_weapon");
 	name_rooms = document.getElementById("name_rooms");
-	person_murder = document.getElementById("person_murder");
+	full_case = document.getElementById("full_case");
 	container_hearts = document.getElementById("hearts");
 	containerScore = document.getElementById("container-score");
 	localStorage.setItem("num_hearts", 3);
@@ -585,7 +585,7 @@ let paintingSuspects = (arrSuspects) => {
 		column.id = `character-${character.id}`;
 		column.innerHTML = `
 		<div id="cardId-assasin-${character.id}" class="container-cardz"  > 
-			<a href="#" id="btn-possAssesin-${character.id}"  > 
+			<div id="btn-possAssesin-${character.id}"  > 
 				<div class="cardz-asssin" >	
 				<figure>
 					<img src=" ${character.image}" id="imgIdSus-${character.id}" class="rounded img-fluid"   >
@@ -594,7 +594,7 @@ let paintingSuspects = (arrSuspects) => {
 					<p class="cardz-title ">${character.name}</p>
 				</div>
 				</div>		
-			</a>
+			</div>
 		</div>		
 		`;
 
@@ -613,20 +613,23 @@ let paintingWeapons = (arrWeapons) => {
 		column.className = "col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mt-3";
 		column.id = `weapon-${weapon.id}`;
 		column.innerHTML = `
- 		<div id="cardId-weapon-${weapon.id}" > 
-			<a href="#" id="btn-possWeapon-${weapon.id}"  >
+ 		<div id="cardId-weapon-${weapon.id}" class="container-cardz"  > 
+			<div id="btn-possWeapon-${weapon.id}">
 				<div class="cardz-weapons"  >
-					<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgIdWea-${weapon.id}" class="rounded"  style="width:100%" >
-					<div class="container">
+				<figure>	
+				<img src="${PATH_IMGS}weapons/${weapon.name_image}.png" id="imgIdWea-${weapon.id}"   class="rounded img-fluid"   >
+				</figure>
+				<div class="container">
 						<p class="cardz-title">${weapon.name}</p>
-					</div>
 				</div>
-			</a> 
+				</div>
+			</div> 
 		</div>
 		`;
 
 		containerWeapons.append(column);
 		let btnWeapons = document.getElementById(`btn-possWeapon-${weapon.id}`);
+
 		btnWeapons.onclick = () => tickCardWeapon(weapon.id);
 	});
 };
@@ -643,14 +646,14 @@ let paintingRooms = (arrRooms) => {
 		column.id = `rooms-${rooms.id}`;
 		column.innerHTML = `
 		 	<div id="cardId-room-${rooms.id}"> 
-				<a href="#" id="btn-poss-rooms-${rooms.id}"  >
+				<div id="btn-poss-rooms-${rooms.id}"  >
 					<div class="cardz-rooms"  >
 						<img src="${PATH_IMGS}rooms/${rooms.name_image}.png" id="imgIdRoom-${rooms.id}" class="rounded"  style="width:100%" >
 						<div class="container">
 							<p class="cardz-title">${rooms.name}</p>
 						</div>
 					</div>
-				</a>
+				</div>
 			</div>
 		`;
 
@@ -689,9 +692,9 @@ let paintCase = (id_murder, suspectsArray) => {
 	// console.log("id_murder, suspectsArray", id_murder);
 
 	person_died = suspectsArray.find(({ id }) => id === id_murder);
-	person_murder.innerHTML = `Mataron a <br>
-	 <span> ${person_died.name} </span> <img class="img-murder rounded" src="${person_died.image}"> 
-	  tienes que adivinar quién fue, con qué lo mato y dónde lo mató`;
+	full_case.innerHTML = `Mataron a <br>
+	 <span> ${person_died.name} </span> <img class="img-murder rounded img-fluid" src="${person_died.image}"> 
+	  tienes que adivinar <span>quién fue</span>, <span>con qué</span> lo mato y <span>dónde</span> lo mató`;
 	btn_check_mistery.onclick = () => checkMistery();
 };
 
@@ -805,9 +808,8 @@ let swatTryAgain = () => {
 	cardRoom = document.getElementById(`cardId-room-${ternary.room}`);
 
 	decreaseHearts();
+	checkScore();
 };
-
-let showCatCry = () => {};
 
 let evalueAssasin = () => {
 	id_assasin_real = parseInt(localStorage.getItem("id_assasin"));
@@ -818,21 +820,7 @@ let evalueAssasin = () => {
 	} else {
 		assasin = false;
 
-		Swal.fire({
-			toast: true,
-			imageUrl: `${PATH_IMGS}/errors/cat_sad.gif`,
-			imageWidth: 220,
-			width: 220,
-			imageHeight: 220,
-			background: "#323643",
-			html: `<p class="txt-fail"> Intenta de nuevo </p>`,
-			position: "center",
-			showConfirmButton: false,
-			timer: 1700,
-			timerProgressBar: true,
-		}).then(() => {
-			swatResultAssasin(assasin);
-		});
+		swatResultAssasin(assasin);
 	}
 };
 
@@ -844,22 +832,7 @@ let evalueRoom = () => {
 		swatResultRoom(room);
 	} else {
 		room = false;
-
-		Swal.fire({
-			toast: true,
-			imageUrl: `${PATH_IMGS}/errors/cat_sad.gif`,
-			imageWidth: 220,
-			width: 220,
-			imageHeight: 220,
-			background: "#323643",
-			html: `<p class="txt-fail"> Intenta de nuevo </p>`,
-			position: "center",
-			showConfirmButton: false,
-			timer: 1700,
-			timerProgressBar: true,
-		}).then(() => {
-			swatResultRoom(room);
-		});
+		swatResultRoom(room);
 	}
 };
 
@@ -871,22 +844,7 @@ let evalueWeapon = () => {
 		swatResultWeapon(weapon);
 	} else {
 		weapon = false;
-
-		Swal.fire({
-			toast: true,
-			imageUrl: `${PATH_IMGS}/errors/cat_sad.gif`,
-			imageWidth: 220,
-			width: 220,
-			imageHeight: 220,
-			background: "#323643",
-			html: `<p class="txt-fail"> Intenta de nuevo </p>`,
-			position: "center",
-			showConfirmButton: false,
-			timer: 1700,
-			timerProgressBar: true,
-		}).then(() => {
-			swatResultWeapon(weapon);
-		});
+		swatResultWeapon(weapon);
 	}
 };
 
@@ -898,9 +856,20 @@ let swatResultRoom = (room) => {
 		cardRoom.classList.remove("selected-card");
 	}
 
+	array_sorry = [
+		`<p class="txt-fail"> Error no fue en la <span> ${dataRoom.name}</span> el asesinato </p>`,
+		`<p class="txt-fail"> Lo siento</p>`,
+		`${PATH_IMGS}errors/cat_sad.gif`,
+	];
+	array_congratulation = [
+		`<p class="txt-winner">Correcto si fue en la <span class="txt-win">${dataAssasin.name} el arma </span> </p>`,
+		`<p class="txt-winner"> Vas bien</p>`,
+		`${PATH_IMGS}errors/cat_yei.gif`,
+	];
+
 	room == true
-		? (message = `<p class="txt-fail">Correcto si fue en  <span class="txt-win">  ${dataRoom.name} </span></p>`)
-		: (message = `<p class="txt-fail"> No es <span> ${dataRoom.name} </span> </p>`);
+		? (array_state = array_congratulation)
+		: (array_state = array_sorry);
 
 	if (room) {
 	} else {
@@ -919,16 +888,27 @@ let swatResultRoom = (room) => {
 	ternary.room = null;
 
 	Swal.fire({
-		toast: true,
-		imageUrl: `${PATH_IMGS}rooms/${dataRoom.name_image}.png`,
-		imageWidth: 220,
-		width: 220,
-		imageHeight: 220,
+		imageWidth: 300,
+		width: 800,
+		imageHeight: 300,
 		background: "#323643",
-		html: `${message}`,
+		html: `
+		<div class="row" >
+				<div class="col-12">
+					${array_state[1]}
+					<img src="${array_state[2]}"  class="container__img">
+					<div class="row">
+						<div class="col-12 mt-2">
+						${array_state[0]} <br>   
+						<img src="${PATH_IMGS}rooms/${dataRoom.name_image}.png" class="container__img">
+						</div>						 
+					</div>
+				</div>
+			</div> 
+ 		`,
 		position: "center",
 		showConfirmButton: false,
-		timer: 1900,
+		timer: 6500,
 		timerProgressBar: true,
 	});
 };
@@ -937,15 +917,27 @@ let swatResultWeapon = (weapon) => {
 	console.log("weapon what i send,", ternary.weapon);
 
 	dataWeapon = weaponsArray.find((wep) => wep.id == ternary.weapon);
+	let array_state;
 
 	if (weapon) {
 	} else {
 		cardWeapon.classList.remove("selected-card");
 	}
 
+	array_sorry = [
+		`<p class="txt-fail"> Error no es la <span> ${dataWeapon.name}</span> el arma </p>`,
+		`<p class="txt-fail"> Lo siento</p>`,
+		`${PATH_IMGS}errors/cat_sad.gif`,
+	];
+	array_congratulation = [
+		`<p class="txt-winner">Correcto si es <span class="txt-win">${dataAssasin.name} el arma </span> </p>`,
+		`<p class="txt-winner"> Vas bien</p>`,
+		`${PATH_IMGS}errors/cat_yei.gif`,
+	];
+
 	weapon == true
-		? (message = `<p class="txt-fail">Correcto si fue con la <span class="txt-win"> ${dataWeapon.name} </span> </p>`)
-		: (message = `<p class="txt-fail"> No es <span> ${dataWeapon.name} </span> </p>`);
+		? (array_state = array_congratulation)
+		: (array_state = array_sorry);
 
 	if (weapon) {
 	} else {
@@ -964,30 +956,53 @@ let swatResultWeapon = (weapon) => {
 	ternary.weapon = null;
 
 	Swal.fire({
-		toast: true,
-		imageUrl: `${PATH_IMGS}weapons/${dataWeapon.name_image}.png`,
-		imageWidth: 220,
-		width: 220,
-		imageHeight: 220,
+		imageWidth: 300,
+		width: 800,
+		imageHeight: 300,
 		background: "#323643",
-		html: `${message}`,
+		html: `
+		<div class="row" >
+				<div class="col-12">
+						${array_state[1]}
+					<img src="${array_state[2]}"  class="container__img">
+					<div class="row">
+						<div class="col-12 mt-2">
+						 ${array_state[0]} <br>   
+						<img src="${PATH_IMGS}weapons/${dataWeapon.name_image}.png" class="container__img">
+						</div>						 
+					</div>
+				</div>
+			</div> 
+ 		`,
 		position: "center",
 		showConfirmButton: false,
-		timer: 1900,
+		timer: 6500,
 		timerProgressBar: true,
 	}).then(() => evalueRoom());
 };
 
 let swatResultAssasin = (assasin) => {
 	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
+	let array_state;
 
 	dataAssasin = suspectsArray.find((suspect) => suspect.id == ternary.assasin);
 
 	console.log("entro al no assesino", ternary.assasin);
 
+	array_sorry = [
+		`<p class="txt-fail"> Error no es <span> ${dataAssasin.name}</span> el asesino </p>`,
+		`<p class="txt-fail"> Lo siento</p>`,
+		`${PATH_IMGS}errors/cat_sad.gif`,
+	];
+	array_congratulation = [
+		`<p class="txt-winner">Correcto si es <span class="txt-win">${dataAssasin.name} </span> </p>`,
+		`<p class="txt-winner"> Vas bien</p>`,
+		`${PATH_IMGS}errors/cat_yei.gif`,
+	];
+
 	assasin == true
-		? (message = `<p class="txt-fail">Correcto si es <span class="txt-win">${dataAssasin.name} </span> </p>`)
-		: (message = `<p class="txt-fail"> No es <span> ${dataAssasin.name}</span> </p>`);
+		? (array_state = array_congratulation)
+		: (array_state = array_sorry);
 
 	if (assasin) {
 	} else {
@@ -1001,16 +1016,28 @@ let swatResultAssasin = (assasin) => {
 	ternary.assasin = null;
 
 	Swal.fire({
-		toast: true,
-		imageUrl: `${dataAssasin.image}`,
-		imageWidth: 220,
-		width: 220,
-		imageHeight: 220,
+		imageWidth: 300,
+		width: 800,
+		imageHeight: 300,
 		background: "#323643",
-		html: `${message}`,
+		html: `
+		<div class="row" >
+				<div class="col-12">
+					${array_state[1]}
+					 
+					<img src="${array_state[2]}" class="container__img">
+					<div class="row">
+						<div class="col-12 mt-2">
+						 ${array_state[0]} <br>   
+						<img src="${dataAssasin.image}" class="container__img">
+						</div>						 
+					</div>
+				</div>
+			</div> 
+ 		`,
 		position: "center",
 		showConfirmButton: false,
-		timer: 1900,
+		timer: 6500,
 		timerProgressBar: true,
 	}).then(() => evalueWeapon());
 };

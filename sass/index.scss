@@ -19,12 +19,18 @@ a:active {
 
 // variables
 
+.btn-check-mistery {
+	font-size: 22px;
+	font-weight: bold;
+}
+
 $gray: #393e46;
 $gray-1: #3c3c3c;
 $gray-2: #606470;
 $green: #4aa96c;
 $rose: #f27c7c;
 $rose-2: #f56d8f;
+$red: #931a25;
 $blue: #6bacbf;
 
 body {
@@ -110,23 +116,25 @@ body {
 	}
 }
 
-#person_murder {
-	text-shadow: 1px 1px 2px rgb(63, 63, 63);
-	color: white;
+.container-case {
+	background-color: $gray;
+	border-radius: 15px;
+}
+
+#full_case {
+	// text-shadow: 1px 1px 2px rgb(63, 63, 63);
+	color: $rose-2;
 	font-size: 24px;
 	font-weight: bold;
 	text-align: center;
 
 	span {
-		color: $rose;
+		color: white;
 	}
 }
 
-
-
-.img-murder{
-filter: grayscale(90%);
-
+.img-murder {
+	filter: grayscale(90%);
 }
 
 .container-cardz {
@@ -209,6 +217,13 @@ filter: grayscale(90%);
 	padding-right: 4px;
 }
 
+.container-points {
+	background-color: $gray;
+	margin: 3% 0;
+	border-radius: 15px;
+	padding: 2%;
+}
+
 #container-score {
 	@extend .tit-points;
 	color: yellow;
@@ -232,8 +247,8 @@ filter: grayscale(90%);
 }
 
 .txt-fail {
-	font-size: 22px;
-	font-weight: normal;
+	font-size: 26px;
+	font-weight: bold;
 	color: white;
 
 	span {
@@ -246,7 +261,7 @@ filter: grayscale(90%);
 		}
 	}
 
-	span.txt-win{
+	span.txt-win {
 		color: gold;
 	}
 }
