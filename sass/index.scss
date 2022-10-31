@@ -172,6 +172,23 @@ body {
 	box-shadow: 0 10px 16px 0 rgba(255, 255, 255, 0.85);
 }
 
+.txt-fail {
+	font-size: 26px;
+	font-weight: bold;
+	color: $rose-2;
+
+	span {
+		font-weight: 24px;
+		color: white;
+		font-weight: bold;
+	}
+}
+
+.swal2-styled.swal2-confirm {
+	background-color: #e5f876 !important;
+	color: #2a2f39 !important;
+}
+
 .cardz-text {
 	@extend .txt-fail;
 	color: $green !important;
@@ -229,7 +246,7 @@ body {
 .swa-text {
 	font-size: 24px;
 	font-weight: bold;
-	color: #f56d8f;
+	color: $rose-2;
 	font-style: italic;
 
 	span {
@@ -244,28 +261,8 @@ body {
 	}
 }
 
-.txt-fail {
-	font-size: 26px;
-	font-weight: bold;
-	color: $rose;
-
-	span {
-		font-weight: 24px;
-		color: white;
-		font-weight: bold;
-
-		:nth-child(2) {
-			color: gold;
-		}
-	}
-
-	span.txt-win {
-		color: gold;
-	}
-}
-
 .txt-na-na {
-	color: #f56d8f;
+	color: $rose-2;
 	font-weight: bold;
 	font-weight: 26px;
 }

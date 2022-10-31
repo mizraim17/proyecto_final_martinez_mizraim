@@ -121,6 +121,19 @@ body {
 .cardz-asssin:hover, .cardz-weapons:hover, .cardz-rooms:hover {
   box-shadow: 0 10px 16px 0 rgba(255, 255, 255, 0.85); }
 
+.txt-fail, .cardz-text, .txt-winner {
+  font-size: 26px;
+  font-weight: bold;
+  color: #f56d8f; }
+  .txt-fail span, .cardz-text span, .txt-winner span {
+    font-weight: 24px;
+    color: white;
+    font-weight: bold; }
+
+.swal2-styled.swal2-confirm {
+  background-color: #e5f876 !important;
+  color: #2a2f39 !important; }
+
 .cardz-text {
   color: #4aa96c !important; }
   .cardz-text span {
@@ -172,19 +185,6 @@ body {
     font-weight: bold; }
   .swa-text span:nth-child(1) {
     color: tomato; }
-
-.txt-fail, .cardz-text, .txt-winner {
-  font-size: 26px;
-  font-weight: bold;
-  color: #f27c7c; }
-  .txt-fail span, .cardz-text span, .txt-winner span {
-    font-weight: 24px;
-    color: white;
-    font-weight: bold; }
-    .txt-fail span :nth-child(2), .cardz-text span :nth-child(2), .txt-winner span :nth-child(2) {
-      color: gold; }
-  .txt-fail span.txt-win, .cardz-text span.txt-win, .txt-winner span.txt-win {
-    color: gold; }
 
 .txt-na-na {
   color: #f56d8f;

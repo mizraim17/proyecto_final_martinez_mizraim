@@ -828,16 +828,16 @@ let swatLose = () => {
 		</div> 
 		<div class="row">
 			<div class="col-4 mt-2">
-				<p class="txt-winner"> asesinó a<span> <br>
+				<p class="txt-fail"> asesinó a<span> <br>
 					${name_murdered.name}  </span> </p>
 				<img src="${name_murdered.image}" class="container__img"  >
 			</div>
 			<div class="col-4">
-				<p class="txt-winner"> con la <span> <br> ${weaponsArray[id_weapon].name} </span> </p>
+				<p class="txt-fail"> con la <span> <br> ${weaponsArray[id_weapon].name} </span> </p>
 				<img src="${PATH_IMGS}weapons/${weaponsArray[id_weapon].name_image}.png"  class="container__img" >
 			</div>
 			<div class="col-4">
-				<p class="txt-winner"> en la <span> <br> ${roomsArray[id_room].name} </span> </p>
+				<p class="txt-fail"> en la <span> <br> ${roomsArray[id_room].name} </span> </p>
 				<img src="${PATH_IMGS}rooms/${roomsArray[id_room].name_image}.png"  class="container__img" >
 			</div>
 		</div>
