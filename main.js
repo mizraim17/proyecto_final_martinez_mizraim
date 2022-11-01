@@ -113,7 +113,7 @@ let initElements = () => {
 	full_case = document.getElementById("full_case");
 	container_hearts = document.getElementById("hearts");
 	containerScore = document.getElementById("container-score");
-	localStorage.setItem("num_hearts", 4);
+	localStorage.setItem("num_hearts", 5);
 	localStorage.setItem("score", 1200);
 	btn_check_mistery = document.getElementById("check-mistery");
 };
@@ -634,21 +634,21 @@ let genereMistery = (arrayWithoutMurdered, numPersonMurdered) => {
 		(suspect) => suspect.id == arrayIdsWithoutMurdered[numAssesin]
 	);
 
-	console.log(
-		"%c name_assasin",
-		"background: #222; color: #bada55",
-		name_assasin.name
-	);
-	console.log(
-		"%c weaponsArray",
-		"background: #222; color: #bada55",
-		weaponsArray[numWeapon].name
-	);
-	console.log(
-		"%c roomsArray",
-		"background: #222; color: #bada55",
-		roomsArray[numRoom].name
-	);
+	// console.log(
+	// 	"%c name_assasin",
+	// 	"background: #222; color: #bada55",
+	// 	name_assasin.name
+	// );
+	// console.log(
+	// 	"%c weaponsArray",
+	// 	"background: #222; color: #bada55",
+	// 	weaponsArray[numWeapon].name
+	// );
+	// console.log(
+	// 	"%c roomsArray",
+	// 	"background: #222; color: #bada55",
+	// 	roomsArray[numRoom].name
+	// );
 };
 
 //Put te mistery and said who died
@@ -841,7 +841,7 @@ let evalueAssasin = () => {
 	id_assasin_real = parseInt(localStorage.getItem("id_assasin"));
 
 	if (id_assasin_real == ternary.assasin) {
-		console.log("le atinaste al asesino");
+		// console.log("le atinaste al asesino");
 		assasin = true;
 		swatResultAssasin(assasin);
 	} else {
@@ -1030,7 +1030,7 @@ let swatResultWeapon = (weapon) => {
 };
 
 let swatResultAssasin = (assasin) => {
-	console.log("estado asesino true o false", assasin);
+	// console.log("estado asesino true o false", assasin);
 
 	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
 	let array_state;
