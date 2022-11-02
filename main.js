@@ -25,6 +25,7 @@ const roomsArray = [
 	new arraysGames(2, "Zona de Parking", "estacionamiento"),
 	new arraysGames(3, "Bodega", "bodega"),
 	new arraysGames(4, "Sala de Juntas", "juntas"),
+	new arraysGames(5, "Zona de muñecos de nieve", "zona_munecos_nieve"),
 ];
 
 const weaponsArray = [
@@ -33,13 +34,14 @@ const weaponsArray = [
 	new arraysGames(2, "Pistola", "pistola"),
 	new arraysGames(3, "Engrapadora en gelatina", "engrapadora"),
 	new arraysGames(4, "Pistola de soldar", "soplete"),
+	new arraysGames(5, "Gata de Angela", "gato"),
 ];
 
 //Function generate number random depending of size of array
 let doRandom = (arrSearch) =>
 	Math.round(Math.random() * (arrSearch.length - 1));
 
-//Generate array without person die because he dont cant be the murder
+//Generate array without person die because he dont can't be the murder
 let listWithoutMurder = (nameDiedPerson, suspectsArray) => {
 	newList = suspectsArray.filter((item) => item.name !== nameDiedPerson);
 	return newList;
@@ -66,7 +68,7 @@ let genereAssesinMurder = (suspectsArray) => {
 //generate numer randoms
 let getNumberRandom = (num) => Math.round(Math.random() * num);
 
-//generate list of character to ask
+//generate list of random number to fetch the api of Rick and Morty
 
 let getArrayCharacters = () => {
 	let arrCharacter = getNumberRandom(826);
@@ -78,7 +80,7 @@ let getArrayCharacters = () => {
 	return arrCharacter;
 };
 
-//get characters api of rick and morthy
+//get characters of the rick and morthy api
 
 let getCharacters = (arrayCharacters) => {
 	fetch(`https://rickandmortyapi.com/api/character/${arrayCharacters}`)
@@ -98,7 +100,6 @@ let initElements = () => {
 	ternary_game = { assasin: false, weapon: false, room: false };
 
 	container_loader = document.getElementById("container-loader");
-
 	containerCharacters = document.getElementById("containerCharacters");
 	containerListSuspects = document.getElementById("containerListSuspects");
 	containerListWeapons = document.getElementById("containerListWeapons");
@@ -118,25 +119,28 @@ let initElements = () => {
 	btn_check_mistery = document.getElementById("check-mistery");
 };
 
+//cross off the  Suspects list when you choose wrong option
 let crossListSuspect = (idSuspect) => {
 	id_suspect = idSuspect;
 	suspect_list = document.getElementById(`list-suspect-${id_suspect}`);
 	suspect_list.classList.add("cross-text");
 };
 
+//cross off the  Weapons list when you choose wrong option
 let crossListWeapon = (idWeapon) => {
 	id_weapon = idWeapon;
 	suspect_list = document.getElementById(`list-weapons-${id_weapon}`);
-
 	suspect_list.classList.add("cross-text");
 };
 
+//cross off the  Rooms list when you choose wrong option
 let crossListRoom = (idRoom) => {
 	id_room = idRoom;
 	suspect_list = document.getElementById(`list-rooms-${id_room}`);
 	suspect_list.classList.add("cross-text");
 };
 
+//painting the list of suspects
 let generateListSuspects = (arrSuspects) => {
 	containerListSuspects.innerHTML = "";
 
@@ -147,6 +151,7 @@ let generateListSuspects = (arrSuspects) => {
 	});
 };
 
+//painting the list of Weapons
 let generateListWeapons = (arrWeapons) => {
 	containerListWeapons.innerHTML = "";
 	arrWeapons.forEach((weapons) => {
@@ -156,6 +161,7 @@ let generateListWeapons = (arrWeapons) => {
 	});
 };
 
+//painting the list of Rooms
 let generateListRooms = (arrRooms) => {
 	containerListRooms.innerHTML = "";
 	arrRooms.forEach((rooms) => {
@@ -165,6 +171,7 @@ let generateListRooms = (arrRooms) => {
 	});
 };
 
+//Show all case, who, when and what weapon
 let showSolutionMistery = () => {
 	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
 	id_assasin = localStorage.getItem("id_assasin");
@@ -194,11 +201,13 @@ let showSolutionMistery = () => {
 	});
 };
 
+//Reboot the game
 let rebootGame = () => {
 	getCharacters(getArrayCharacters());
 	localStorage.clear();
 };
 
+//Show who is the killer V2
 let showLoseAssasin = (real_assasin) => {
 	score = localStorage.getItem("score");
 
@@ -221,6 +230,7 @@ let showLoseAssasin = (real_assasin) => {
 	});
 };
 
+//Show who is the killer V2
 let showLoseWeapon = (idWeapon) => {
 	id_weapon_mistery = parseInt(localStorage.getItem("id_weapon"));
 
@@ -239,6 +249,7 @@ let showLoseWeapon = (idWeapon) => {
 	});
 };
 
+//Show where the muerder was  V2
 let showLoseRoom = (idRoom) => {
 	id_room_mistery = parseInt(localStorage.getItem("id_room"));
 
@@ -256,6 +267,7 @@ let showLoseRoom = (idRoom) => {
 	});
 };
 
+//Tick the card when you  click
 let untickCard = (id, id_untick) => {
 	switch (id_untick) {
 		case "assasin":
@@ -288,7 +300,7 @@ let tickCardAssasin = (id_suspect) => {
 	} else if (ternary.assasin == id_suspect) {
 		untickCard(id_suspect, id_untick);
 	} else {
-		swatAssasinChosen();
+		swatErrorChosen(id_untick);
 	}
 };
 
@@ -304,7 +316,7 @@ let tickCardWeapon = (id_weapon) => {
 	} else if (ternary.weapon == id_weapon) {
 		untickCard(id_weapon, id_untick);
 	} else {
-		swatWeaponChosen();
+		swatErrorChosen(id_untick);
 	}
 };
 
@@ -319,16 +331,16 @@ let tickCardRoom = (id_room) => {
 	} else if (ternary.room == id_room) {
 		untickCard(id_room, id_untick);
 	} else {
-		swatRoomChosen();
+		swatErrorChosen(id_untick);
 	}
 };
 
-//Verify who is the killer
+//Verify if the possible assasin is the real killer
 let checkAssasin = (asseMurder, id_suspect) => {
 	let arrWitMurd = [...asseMurder];
 	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
 
-	//get data possible assasin choose by user
+	//get possible assasin choose by user
 	posible_assasin = suspectsArray.find(({ id }) => id === id_suspect);
 
 	num_hearts = parseInt(localStorage.getItem("num_hearts"));
@@ -360,6 +372,8 @@ let checkAssasin = (asseMurder, id_suspect) => {
 	}
 };
 
+//Verify if the weapons choosen is the correct weapon
+
 let checkWeapons = (arrayWeapons, idWeapon) => {
 	let copyArrWeapons = [...arrayWeapons];
 	num_hearts = parseInt(localStorage.getItem("num_hearts"));
@@ -387,6 +401,8 @@ let checkWeapons = (arrayWeapons, idWeapon) => {
 	}
 };
 
+//Verify if the room choosen is the correct place
+
 let checkRooms = (arrayRooms, idRoomPlayer) => {
 	let copyArrRooms = [...arrayRooms];
 	num_hearts = parseInt(localStorage.getItem("num_hearts"));
@@ -412,6 +428,7 @@ let checkRooms = (arrayRooms, idRoomPlayer) => {
 	}
 };
 
+//Show whos is the real killer V2
 let showAssasin = (real_assasin, suspectsArray) => {
 	cardsTotalMistery++;
 
@@ -446,6 +463,7 @@ let showAssasin = (real_assasin, suspectsArray) => {
 	}
 };
 
+//show the real weapon use in the Murder V2
 let showWeapon = () => {
 	cardsTotalMistery++;
 
@@ -481,6 +499,8 @@ let showWeapon = () => {
 		showSolutionMistery();
 	}
 };
+
+//show the real room where the murder happened V2
 
 let showRooms = () => {
 	cardsTotalMistery++;
@@ -519,6 +539,7 @@ let showRooms = () => {
 	}
 };
 
+//painting the cards of the suspects
 let paintingSuspects = (arrSuspects) => {
 	containerCharacters.innerHTML = "";
 	num_hearts = parseInt(localStorage.getItem("num_hearts"));
@@ -550,6 +571,7 @@ let paintingSuspects = (arrSuspects) => {
 	});
 };
 
+//painting the cards of the possibles weapons
 let paintingWeapons = (arrWeapons) => {
 	containerWeapons.innerHTML = "";
 
@@ -581,6 +603,7 @@ let paintingWeapons = (arrWeapons) => {
 	});
 };
 
+//painting the cards of the possibles Rooms
 let paintingRooms = (arrRooms) => {
 	containerRooms.innerHTML = "";
 
@@ -651,7 +674,7 @@ let genereMistery = (arrayWithoutMurdered, numPersonMurdered) => {
 	// );
 };
 
-//Put te mistery and said who died
+//Describe the mistery to be resolve
 let paintCase = (id_murder, suspectsArray) => {
 	person_died = suspectsArray.find(({ id }) => id === id_murder);
 	full_case.innerHTML = ` Mataron a <br>
@@ -664,7 +687,6 @@ let paintCase = (id_murder, suspectsArray) => {
 };
 
 //Verify if the cards choosen solved the mistery
-
 let checkMistery = () => {
 	id_assasin_real = parseInt(localStorage.getItem("id_assasin"));
 	id_weapon_real = parseInt(localStorage.getItem("id_weapon"));
@@ -691,6 +713,7 @@ let checkMistery = () => {
 	}
 };
 
+//When you win, show the complete mistery and play sound
 let swatWin = () => {
 	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
 
@@ -745,6 +768,7 @@ let swatWin = () => {
 	});
 };
 
+//When you lose, show the complete mistery and play sound
 let swatLose = () => {
 	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
 
@@ -808,6 +832,7 @@ let swatLose = () => {
 	});
 };
 
+//show legend if you forget tick some card
 let swatUncompleteTernary = () => {
 	console.table(ternary);
 
@@ -826,6 +851,7 @@ let swatUncompleteTernary = () => {
 	});
 };
 
+//warns you that you were wrong in some information of the mystery
 let swatTryAgain = () => {
 	evalueAssasin();
 
@@ -837,6 +863,7 @@ let swatTryAgain = () => {
 	checkScore();
 };
 
+//Evaluate if you choose the right killer
 let evalueAssasin = () => {
 	id_assasin_real = parseInt(localStorage.getItem("id_assasin"));
 
@@ -846,10 +873,11 @@ let evalueAssasin = () => {
 		swatResultAssasin(assasin);
 	} else {
 		assasin = false;
-
 		swatResultAssasin(assasin);
 	}
 };
+
+//Evaluate if you choose the right room
 
 let evalueRoom = () => {
 	id_room_real = parseInt(localStorage.getItem("id_room"));
@@ -863,6 +891,8 @@ let evalueRoom = () => {
 	}
 };
 
+//Evaluate if you choose the right weapon
+
 let evalueWeapon = () => {
 	id_weapon_real = parseInt(localStorage.getItem("id_weapon"));
 
@@ -875,13 +905,9 @@ let evalueWeapon = () => {
 	}
 };
 
+//choose the correct message if you right o wrong, and tick or untick card, cross of the list, check the number of hearts
 let swatResultRoom = (room) => {
 	dataRoom = roomsArray.find((wep) => wep.id == ternary.room);
-
-	if (room) {
-	} else {
-		cardRoom.classList.remove("selected-card");
-	}
 
 	array_sorry = [
 		`<p class="txt-fail"> Error no fue en la <span> ${dataRoom.name}</span> el asesinato </p>`,
@@ -901,7 +927,6 @@ let swatResultRoom = (room) => {
 	if (room) {
 	} else {
 		cardIdImage = document.getElementById(`imgIdRoom-${ternary.room}`);
-
 		cardIdImage.src = `${PATH_IMGS}errors/no_god.gif`;
 		cardRoom.classList.remove("selected-card");
 
@@ -935,15 +960,6 @@ let swatResultRoom = (room) => {
 			timerProgressBar: true,
 		});
 	} else {
-		let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
-		id_assasin_mistery = parseInt(localStorage.getItem("id_assasin"));
-
-		//get data possible assasin choose by user
-		posible_assasin = suspectsArray.find(({ id }) => id === ternary.assasin);
-		real_assasin = suspectsArray.find(({ id }) => id === id_assasin_mistery);
-
-		ternary.room = null;
-
 		Swal.fire({
 			imageWidth: 300,
 			width: 800,
@@ -971,6 +987,7 @@ let swatResultRoom = (room) => {
 	}
 };
 
+//choose the correct message if you right o wrong, and tick or untick card, cross of the list, check the number of hearts
 let swatResultWeapon = (weapon) => {
 	dataWeapon = weaponsArray.find((wep) => wep.id == ternary.weapon);
 	let array_state;
@@ -992,14 +1009,11 @@ let swatResultWeapon = (weapon) => {
 
 	if (weapon) {
 	} else {
-		cardWeapon.classList.remove("selected-card");
 		cardIdImage = document.getElementById(`imgIdWea-${ternary.weapon}`);
-
 		cardIdImage.src = `${PATH_IMGS}errors/no_god.gif`;
 		cardWeapon.classList.remove("selected-card");
 
 		crossListWeapon(ternary.weapon);
-
 		ternary.weapon = null;
 	}
 
@@ -1029,6 +1043,7 @@ let swatResultWeapon = (weapon) => {
 	}).then(() => evalueRoom());
 };
 
+//choose the correct message if you right o wrong, and tick or untick card, cross of the list, check the number of hearts
 let swatResultAssasin = (assasin) => {
 	// console.log("estado asesino true o false", assasin);
 
@@ -1090,6 +1105,7 @@ let swatResultAssasin = (assasin) => {
 	}).then(() => evalueWeapon());
 };
 
+//Get the id of real killer
 let getDataArray = (id) => {
 	let suspectsArray = JSON.parse(localStorage.getItem("suspectsArray"));
 
@@ -1124,6 +1140,7 @@ let swatSuspectFail = (possibleAssassin) => {
 	}
 };
 
+//Show  possible weapon
 let swatSuspectWeapon = (id_weapon) => {
 	let { id, name, name_image } = weaponsArray[id_weapon];
 
@@ -1151,8 +1168,8 @@ let decreaseHearts = () => {
 
 	paintHearts(num_hearts);
 };
-//painting hearts
 
+//painting hearts
 let paintHearts = (num_hearts) => {
 	num_hearts = parseInt(localStorage.getItem("num_hearts"));
 
@@ -1176,7 +1193,16 @@ let playSound = (win_lose) => {
 	sound.play();
 };
 
-let swatAssasinChosen = () => {
+//Shows that you already chose murderer
+let swatErrorChosen = (id_tick) => {
+	let var_role;
+
+	id_tick == "assasin"
+		? (var_role = " Ya elegiste posible <span>asesino</span> ")
+		: id_tick == "room"
+		? (var_role = " Ya elegiste posible <span>lugar</span> ")
+		: (var_role = " Ya elegiste posible <span>arma </span>");
+
 	Swal.fire({
 		toast: true,
 		imageUrl: `./assets/imgs/errors/ah_ah.gif`,
@@ -1184,7 +1210,7 @@ let swatAssasinChosen = () => {
 		width: 300,
 		imageHeight: 300,
 		background: "#323643",
-		html: `<p class="txt-na-na"> Ya elegiste posible asesino   </p>`,
+		html: `<p class="txt-na-na"> ${var_role}  </p>`,
 		position: "center",
 		showConfirmButton: false,
 		timerProgressBar: true,
@@ -1192,6 +1218,7 @@ let swatAssasinChosen = () => {
 	});
 };
 
+//Shows that you already chose weapon
 let swatWeaponChosen = () => {
 	Swal.fire({
 		toast: true,
@@ -1208,6 +1235,7 @@ let swatWeaponChosen = () => {
 	});
 };
 
+//Shows that you already chose weapon
 let swatRoomChosen = () => {
 	Swal.fire({
 		toast: true,
@@ -1224,6 +1252,7 @@ let swatRoomChosen = () => {
 	});
 };
 
+//Show card if you choose wrong option
 let swatWeaponsFail = (weaponsArray) => {
 	let { id, name, name_image } = weaponsArray;
 	id_weapon_mistery = parseInt(localStorage.getItem("id_weapon"));
@@ -1247,6 +1276,7 @@ let swatWeaponsFail = (weaponsArray) => {
 	num_hearts == 0 ? showLoseWeapon(id_weapon_mistery) : "";
 };
 
+//Show card if you choose wrong option
 let swatRoomFail = (roomsArray) => {
 	let { id, name, name_image } = roomsArray;
 	id_rooms_mistery = parseInt(localStorage.getItem("id_room"));
@@ -1269,6 +1299,7 @@ let swatRoomFail = (roomsArray) => {
 	num_hearts == 0 ? showLoseRoom(id_rooms_mistery) : "";
 };
 
+//decrease the score when you are wrong
 let checkScore = () => {
 	newPoints = parseInt(localStorage.getItem("score"));
 	score = newPoints - 100;
@@ -1276,12 +1307,13 @@ let checkScore = () => {
 	paintingScore(score);
 };
 
+//painting the score
 let paintingScore = () => {
 	newPoints = parseInt(localStorage.getItem("score"));
-
 	containerScore.innerHTML = `${newPoints}`;
 };
 
+//remove the class to show loader
 let manageLoader = () => {
 	container_loader = document.getElementById("container-loader");
 	container_loader.classList.remove("loading");

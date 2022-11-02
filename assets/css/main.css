@@ -190,13 +190,14 @@ body {
   color: #f56d8f;
   font-weight: bold;
   font-weight: 26px; }
+  .txt-na-na span {
+    color: white;
+    font-size: 29px; }
 
 .txt-winner {
   color: #4aa96c; }
   .txt-winner span {
-    color: #f56d8f; }
-    .txt-winner span :nth-child(2) {
-      color: #f56d8f; }
+    color: white; }
 
 img.swal2-image {
   margin: 0; }
